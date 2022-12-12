@@ -1,0 +1,31 @@
+
+    <div id="home">
+        <div class="home-container">
+
+            <div class="short-info">
+                <h1>The best of the wildlife photography.</h1>
+                <h2>Share knowledge about the environment and enrich your life.</h2>
+            </div>
+
+        </div>
+    </div> 
+
+    <ng-container *ngIf="(topics | async) as lastTopics">
+
+      <section class="cards-wrapper">
+        <div *ngFor="let topic of objectKeys(lastTopics)"  class="card-grid-space">
+          <a class="card" routerLink="/topics/{{topic}}" style="--bg-img: url({{lastTopics[topic].imageUrl}})">
+            <div>
+              <h1>{{lastTopics[topic].title}}</h1>
+              <p>{{lastTopics[topic].content | shorten }}</p>
+              <div class="date">{{lastTopics[topic].createdAt | transformDate | date: 'dd MMM yyyy' }}</div>
+              <div class="tags">
+                <!-- //TODO add owner -->
+                <div class="tag">HTML</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+      </section>
+    </ng-container>

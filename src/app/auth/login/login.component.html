@@ -1,0 +1,52 @@
+<section id="login-page">
+
+    <div class="loginSection">
+        <div class="info">
+            <h2>Welcome, again!</h2>
+            <p>View new topics.</p>
+        </div>
+        <form [formGroup]="loginFormGroup" (ngSubmit)="handleLogin()" class="loginForm">
+            <h2>Login</h2>
+            <ul class="noBullet">
+                <li>
+                    <label for="email">Email:</label>
+                    <input [ngClass]="{'input-error': showErrorInControl('email')}"
+                    formControlName="email" 
+                    type="text" class="inputFields" 
+                    id="email" name="email" placeholder="alex@gmail.com" />
+                </li>
+
+                <ng-container *ngIf="showErrorInControl('email')">
+                    <p *ngIf="loginFormGroup.controls['email'].errors?.['required']" class="alert-error">
+                        Email is required!
+                    </p>
+                </ng-container> 
+                <li>
+                    <label for="password">Password:</label>
+                    <input formControlName="password"
+                    type="password"
+                    placeholder="******"
+                    id="password"
+                    class="inputFields"
+                    [ngClass]="{'input-error': showErrorInControl('password')}" />
+                </li>
+
+                <ng-container *ngIf="showErrorInControl('password')">
+                    <p *ngIf="loginFormGroup.controls['password'].errors?.['required']" class="alert-error">
+                        Password is required!
+                    </p>
+                </ng-container>
+
+                <li id="center-btn">
+                    <button [disabled]="loginFormGroup.invalid" id="login-btn">Login</button>
+                </li>
+            </ul>
+            
+            <div class="reg-link">
+                <a routerLink="/user/register">You don't have an acount? Register now!</a>
+            </div>
+        </form>
+
+    </div>
+
+</section>

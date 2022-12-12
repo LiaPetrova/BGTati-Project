@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "bgtati": {
+      "hosting": {
+        "BGTati": [
+          "bgtati"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "bgtati"
+  }
+}

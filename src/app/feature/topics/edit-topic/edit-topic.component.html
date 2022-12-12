@@ -1,0 +1,73 @@
+<div *ngIf="!!oldTopic; else loadingIndicator"  class="newTopic">
+    <div class="info">
+        <h2>Type error? Changed your mind? Edit your topic here!</h2>
+    </div>
+
+    <form [formGroup]="editTopicForm" (ngSubmit)="editTopic()" class="createForm">
+        <h2>Edit</h2>
+        <ul class="noBullet">
+            <li>
+                <label for="title">Title:</label>
+                <input 
+                [ngClass]="{'input-error': showErrorInControl('title')}"
+                formControlName="title"
+                type="text" 
+                class="inputFields" 
+                id="title" 
+                placeholder="Your topic here" 
+                name="title"
+                [value]="oldTopic.title"/>
+            </li>
+
+            <ng-container *ngIf="showErrorInControl('title')">
+                <p *ngIf="editTopicForm.controls['title'].errors?.['required']" class="alert-error">
+                    Title is required!
+                </p>
+                <p *ngIf="editTopicForm.controls['title'].errors?.['minlength']" class="alert-error">
+                    Topic Title must be at least 4 characters long!
+                </p>
+            </ng-container> 
+            
+            <li>
+                <label for="imageUrl">ImageUrl:</label>
+                <input
+                formControlName="imageUrl"
+                id="imageUrl"
+                class="inputFields" 
+                name="imageUrl" 
+                placeholder="http://...">
+            </li>
+
+            <li>
+                <label for="content">Content:</label>
+                <textarea 
+                formControlName="content"
+                id="content"
+                [ngClass]="{'input-error': showErrorInControl('content')}"
+                class="inputFields" 
+                name="content" 
+                placeholder="..."></textarea>
+            </li>
+
+            <ng-container *ngIf="showErrorInControl('content')">
+                <p *ngIf="editTopicForm.controls['content'].errors?.['required']" class="alert-error">
+                    Content is required!
+                </p>
+                <p *ngIf="editTopicForm.controls['content'].errors?.['minlength']" class="alert-error">
+                    Content must be at least 10 characters long!
+                </p>
+            </ng-container>
+
+ 
+            <li id="center-btn">
+                <button [disabled]="editTopicForm.invalid" id="create-btn">Publish Topic</button>
+            </li>
+        </ul>
+    </form>
+ 
+</div> 
+
+<ng-template #loadingIndicator>
+    <mat-spinner></mat-spinner>
+    <p class="loading">Loading...</p>
+</ng-template>

@@ -1,0 +1,144 @@
+<!-- <div>
+    <form [formGroup]="registerFormGroup" (ngSubmit)="handleRegister()">
+        <h3>Register Here</h3>
+      
+        <label for="email">Email</label>
+        <input
+          [ngClass]="{'input-error': showErrorInControl('email')}"
+          formControlName="email"
+          type="text"
+          placeholder="max.musterman@gmail.com"
+          id="email"
+        />
+      
+        <ng-container *ngIf="showErrorInControl('email')">
+            <p *ngIf="registerFormGroup.controls['email'].errors?.['required']" class="alert-error">
+                Email is required!
+            </p>
+            <p *ngIf="registerFormGroup.controls['email'].errors?.['email']" class="alert-error">
+                Email is not valid!
+            </p>
+        </ng-container> 
+      
+        <div formGroupName="passwords">
+        <label for="password">Password</label>
+        <input
+          formControlName="password"
+          type="password"
+          placeholder="******"
+          id="password"
+          [ngClass]="{'input-error': showErrorInControl('password', this.passwordsGroup)}"
+        />
+    
+        <ng-container *ngIf="showErrorInControl('password', this.passwordsGroup)">
+            <p *ngIf="passwordsGroup.controls['password'].errors?.['required']" class="alert-error">
+                Password is required!
+            </p>
+            <p *ngIf="passwordsGroup.controls['password'].errors?.['minlength']" class="alert-error">
+                Password must be at least 6 charaters long!
+            </p>
+        </ng-container>
+      
+        <label for="repassword">Repeat Password</label>
+        <input
+          formControlName="repassword"
+          type="password"
+          placeholder="******"
+          id="repassword"
+          [ngClass]="{'input-error': showErrorInControl('repassword', this.passwordsGroup)}"
+        />
+      
+        <ng-container *ngIf="showErrorInControl('repassword', this.passwordsGroup)">
+            <p class="alert-error">
+                Repeat Password does not match password!
+            </p>
+        </ng-container>
+        
+        </div>
+      
+        <button [disabled]="registerFormGroup.invalid" class="primary-btn">
+          Register
+        </button>
+      
+        <div class="reg-link">
+          <a routerLink="/login">You have an account? Sign In now!</a>
+        </div>
+      </form>
+    </div> -->
+
+
+    <section id="register-page">
+        <div class="signupSection">
+            <div class="info">
+                <h2>Seek advice, share an opinion, help others in difficulty. Join the largest community of dedicated dads!</h2>
+            </div>
+            <form [formGroup]="registerFormGroup" (ngSubmit)="handleRegister()" class="signupForm">
+                <h2>Register</h2>    
+                <ul class="noBullet">
+                    <li>
+                        <label for="email">Email:</label>
+                        <input [ngClass]="{'input-error': showErrorInControl('email')}"
+                        formControlName="email" type="text" class="inputFields" id="email" name="email" placeholder="alex@gmail.com" />
+                    </li>
+
+                    <ng-container *ngIf="showErrorInControl('email')">
+                        <p *ngIf="registerFormGroup.controls['email'].errors?.['required']" class="alert-error">
+                            Email is required!
+                        </p>
+                        <p *ngIf="registerFormGroup.controls['email'].errors?.['email']" class="alert-error">
+                            Email is not valid!
+                        </p>
+                    </ng-container> 
+
+                    <div formGroupName="passwords">
+                    <li>
+                        <label for="password">Password:</label>
+                        <input formControlName="password"
+                        type="password" 
+                        class="inputFields" 
+                        id="password" 
+                        name="password" 
+                        placeholder="******"
+                        [ngClass]="{'input-error': showErrorInControl('password', this.passwordsGroup)}"
+                        />
+                    </li>
+
+                    <ng-container *ngIf="showErrorInControl('password', this.passwordsGroup)">
+                        <p *ngIf="passwordsGroup.controls['password'].errors?.['required']" class="alert-error">
+                            Password is required!
+                        </p>
+                        <p *ngIf="passwordsGroup.controls['password'].errors?.['minlength']" class="alert-error">
+                            Password must be at least 6 charaters long!
+                        </p>
+                    </ng-container>
+
+                    <li>
+                        <label for="repassword">Repeat-Password:</label>
+                        <input 
+                        formControlName="repassword"
+                        [ngClass]="{'input-error': showErrorInControl('repassword', this.passwordsGroup)}"
+                        type="password" 
+                        class="inputFields" 
+                        id="repassword" name="rePassword" 
+                        placeholder="******"
+                         />
+                    </li>
+
+                    <ng-container *ngIf="showErrorInControl('repassword', this.passwordsGroup)">
+                        <p class="alert-error">
+                            Repeat Password does not match password!
+                        </p>
+                    </ng-container>
+
+                    </div>
+                    <li id="center-btn">
+                        <button [disabled]="registerFormGroup.invalid" id="join-btn">Join</button>
+                    </li>
+                </ul>
+
+                <div class="log-link">
+                    <a routerLink="/user/login">You have an account? Login now!</a>
+                </div>
+            </form>
+        </div>
+    </section>

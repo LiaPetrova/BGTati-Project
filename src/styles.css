@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+
+html {
+    font-family: 'Space Grotesk';
+    font-size: 16px;
+    box-sizing: border-box;
+}   
+
+::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.01);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4d6d72;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4d6d72;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body::after {
+    content: '';
+    display: block;
+    height: 50px;
+  }
+
+body {
+    position: relative;
+    min-height: 100vh;
+}
+
+/* main {
+    padding-bottom: 5em;
+} */
+
+body {
+    background-image: url("/assets/background.jpg");
+    background-position: 20% 82%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

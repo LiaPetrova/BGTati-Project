@@ -1,0 +1,50 @@
+<section *ngIf="!!topic; else loadingIndicator" id="details-page">
+    <div class="main_card">
+    <div class="card_left">
+    <div class="card_datails">
+    
+        <h1>{{topic.title}}</h1>
+        <h3>Created by an author: {{(owner$ | async)}}</h3>
+        <div class="card_animal">
+            <p class="card-date">Date: {{topic.createdAt | transformDate | date: 'dd MMM yyyy'}}</p>
+        </div>
+    
+        <p class="disc">Content: {{topic.content}}</p>
+
+        <div *ngIf="topic.ownerId == userId" class="social-btn">
+            <!-- Only for registered user and author of the post -->
+            <a routerLink="/topics/{{topicId}}/edit" class="edit-btn">Edit</a>
+            <a (click)="deleteTopic()" class="del-btn">Delete</a>
+        </div>
+    
+    </div>
+    </div>
+    <div class="card_right">
+    <img src="{{topic.imageUrl}}" alt="image">
+    </div>
+    </div>
+    
+    </section>
+    
+    <section id="votes">
+        <div class="vote-info">
+            <div class="card_left">
+                <div class="card_datails">
+                    <h1>Votes</h1>
+                    <div class="card_vote">
+                        <!-- Show the rating of votes, if there are no votes yet, the number must be 0. -->
+                        <p class="PV">Total rating of votes: </p>
+                    </div>
+                    <!-- If there are already people who have cast their vote for the post, separate their emails with a comma and a space ", " -->
+                    <p class="disc">People who voted for the post - </p>
+                    <!-- If not display: -->
+                    <p class="disc">People who voted for the post - No one has voted yet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <ng-template #loadingIndicator>
+        <mat-spinner></mat-spinner>
+        <p class="loading">Loading...</p>
+    </ng-template>
