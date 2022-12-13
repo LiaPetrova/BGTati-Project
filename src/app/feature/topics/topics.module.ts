@@ -10,6 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { DetailsTopicComponent } from './details-topic/details-topic.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { EditTopicComponent } from './edit-topic/edit-topic.component';
+import { CommentsComponent } from './comments/comments.component';
 
 
 
@@ -20,7 +21,8 @@ import { EditTopicComponent } from './edit-topic/edit-topic.component';
     AllTopicsComponent,
     SingleTopicComponent,
     DetailsTopicComponent,
-    EditTopicComponent
+    EditTopicComponent,
+    CommentsComponent
   ],
   imports: [
     CommonModule,

@@ -10,7 +10,7 @@
         </div>
     </div> 
 
-    <ng-container *ngIf="(topics | async) as lastTopics">
+    <ng-container *ngIf="(topics | async) as lastTopics; else loadingIndicator">
 
       <section class="cards-wrapper">
         <div *ngFor="let topic of objectKeys(lastTopics)"  class="card-grid-space">
@@ -21,7 +21,7 @@
               <div class="date">{{lastTopics[topic].createdAt | transformDate | date: 'dd MMM yyyy' }}</div>
               <div class="tags">
                 <!-- //TODO add owner -->
-                <div class="tag">HTML</div>
+                <div class="tag">{{lastTopics[topic].ownerEmail}}</div>
               </div>
             </div>
           </a>
@@ -29,3 +29,8 @@
         
       </section>
     </ng-container>
+
+    <ng-template #loadingIndicator>
+      <mat-spinner></mat-spinner>
+      <p class="loading">Loading...</p>
+    </ng-template>

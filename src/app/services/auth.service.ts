@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Auth, authState, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { collection, doc, Firestore, getDoc, getDocs, query, where } from '@angular/fire/firestore';
 import { addDoc } from '@firebase/firestore';
@@ -8,7 +8,7 @@ import { IUser } from '../core/interfaces';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit {
 
   currentUser$: Observable<any> = authState(this.auth);
   isLoggedIn$ = this.currentUser$.pipe(map(user => !!user));
@@ -18,6 +18,9 @@ export class AuthService {
   constructor(
     private auth: Auth,
     private fs: Firestore) { }
+
+  ngOnInit(): void {
+  }
 
   login$(email: string, password: string) {
     return from(signInWithEmailAndPassword(this.auth, email, password));

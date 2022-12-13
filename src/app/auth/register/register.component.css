@@ -80,7 +80,7 @@
     transition: .4s;
 }
 
-#join-btn:hover {
+#join-btn:hover:enabled {
     background: rgba(20, 20, 20, .8);
     padding: 10px 80px;
 }
@@ -127,8 +127,6 @@ label:nth-of-type(2) {
   }
 
   button:disabled,
-button[disabled]{
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
-}
+  button[disabled]{
+    opacity: 0.5;
+  }

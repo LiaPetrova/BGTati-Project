@@ -1,0 +1,45 @@
+<p>profile works!</p>
+<div *ngIf="topics">
+
+    <div *ngFor="let topic of objectKeys(topics)">
+        <p>{{topics[topic].content}}</p>
+    </div>
+</div>
+
+<section id="my-posts">
+    <h1>My post.</h1>
+
+    <ng-container *ngIf="topics; else loadingIndicator">
+        <div *ngIf="topics.length > 0; else noTopic"  class="my-container">
+                <div class="cards-wrapper">
+                <div *ngFor="let topic of objectKeys(topics)"  class="card-grid-space">
+                    <a class="card" routerLink="/topics/{{topic}}" style="--bg-img: url({{topics[topic].imageUrl}})">
+                    <div>
+                        <h1>{{topics[topic].title}}</h1>
+                        <p>{{topics[topic].content | shorten }}</p>
+                        <div class="date">{{topics[topic].createdAt | transformDate | date: 'dd MMM yyyy' }}</div>
+                        <div class="tags">
+                        <!-- //TODO add owner -->
+                        <div class="tag">{{topics[topic].ownerEmail}}</div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                </div>
+        </div>
+
+        <ng-template #noTopic>
+            <div class="no-posts">
+                <div class="no-posts-img">
+                    <img src="/assets/create.jpg" alt="image_nature_3">
+                </div>
+                <p class="no-offer">There are no own posts yet...</p>
+            </div>
+        </ng-template>
+    </ng-container>
+
+    <ng-template #loadingIndicator>
+        <mat-spinner></mat-spinner>
+        <p class="loading">Loading...</p>
+      </ng-template>
+</section>

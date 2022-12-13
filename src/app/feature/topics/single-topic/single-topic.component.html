@@ -5,8 +5,7 @@
         <p>{{lastTopics[topic].content | shorten }}</p>
         <div class="date">{{lastTopics[topic].createdAt | transformDate | date: 'dd MMM yyyy' }}</div>
         <div class="tags">
-          <!-- //TODO add owner -->
-          <div class="tag">HTML</div>
+          <div class="tag">{{lastTopics[topic].ownerEmail}}</div>
         </div>
       </div>
     </a>

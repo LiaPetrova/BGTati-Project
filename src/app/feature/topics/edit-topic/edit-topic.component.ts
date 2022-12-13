@@ -24,7 +24,7 @@ export class EditTopicComponent implements OnInit {
     return sourceGroup.controls[controlName].touched && sourceGroup.controls[controlName].invalid;
   }
 
-  currentUser$ = this.authService.currentUser$
+  currentUser$ = this.authService.currentUser$;
   userId!: string;
   oldTopic!: any;
   topicId!: string;
@@ -64,19 +64,17 @@ export class EditTopicComponent implements OnInit {
     const newTopic = {
       title: this.editTopicForm.value.title,
       content: this.editTopicForm.value.content,
-      imageUrl: this.editTopicForm.value.imageUrl? this.editTopicForm.value.imageUrl : '/assets/topic.jpg',
+      imageUrl: this.editTopicForm.value.imageUrl ? this.editTopicForm.value.imageUrl : '/assets/topic.jpg',
     }
     try {
       const response = await this.topicService.UpdateTopic(newTopic, this.topicId);
-      console.log(response);
       
     } catch (error) {
-      
+      console.error(error);
     }
     
     this.router.navigate([`/topics/${this.topicId}`]);
 
-   
   }
 
 }

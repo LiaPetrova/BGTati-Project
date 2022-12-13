@@ -104,7 +104,7 @@ textarea {
     font-size: 18px;
 }
 
-#create-btn:hover {
+#create-btn:hover:enabled {
     background: rgba(20, 20, 20, .8);
     padding: 10px 80px;
 }
@@ -131,4 +131,9 @@ textarea {
     text-align: center;
     font-size: 20px;
     color: #fff;
+}
+
+button:disabled,
+button[disabled]{
+  opacity: 0.5;
 }

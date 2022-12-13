@@ -24,13 +24,17 @@ export class NewTopicComponent implements OnInit {
 
   currentUser$ = this.authService.currentUser$
   userId!: any;
+  userEmail!: string;
 
 
   constructor(private formBuilder: FormBuilder, private topicService: TopicService, private router: Router, private authService: AuthService) { }
 
 
   ngOnInit(): void {
-    this.currentUser$.subscribe(user => this.userId = user.uid);
+    this.currentUser$.subscribe(user => {
+      this.userId = user.uid;
+      this.userEmail = user.email;
+    });
   }
   async submitTopic() {
 
@@ -40,13 +44,13 @@ export class NewTopicComponent implements OnInit {
       imageUrl: this.newTopicForm.value.imageUrl? this.newTopicForm.value.imageUrl : '/assets/topic.jpg',
       comments: [],
       createdAt: serverTimestamp(),
-      ownerId: this.userId
+      ownerId: this.userId,
+      ownerEmail: this.userEmail
     }
     try {
-      const response = await this.topicService.AddTopic(newTopic);
-      console.log(response);
-      
+      await this.topicService.AddTopic(newTopic);      
     } catch (error) {
+      console.error(error);
       
     }
     

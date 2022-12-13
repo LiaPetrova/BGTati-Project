@@ -131,27 +131,9 @@
     color: #ee900c;
     background-color: #fff;
 }
-/* .vote-up {
-    background-color: #9B2335;
-}
-
-.thanks-for-vote {
-    width: 185px;
-    background-color: rgba(116, 153, 226, 0.89);
-}
-
-.get-statistics {
-    background-color: darksalmon;
-}
-
-.vote-down {
-    background-color: #5B5EA6;
-} */
 
 .edit-btn:hover,
-.del-btn:hover,
-.vote-up:hover,
-.vote-down:hover {
+.del-btn:hover {
     -webkit-transform: scale(1.1);
     -ms-transform: scale(1.1);
     transform: scale(1.1);
@@ -281,12 +263,13 @@ span {
     background-position: center center;
 }
 
-#votes {
+#comments {
     margin-top: 3em;
     left: 50%;
+    text-align: center;
 }
 
-.vote-info {
+.comments-info {
     color: #fff;
     height: 200px auto;
     margin: 50px auto;
@@ -302,18 +285,6 @@ span {
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
 }
 
-.card_vote {
-    width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    margin-top: 6px;
-    margin-left: 2em;
-    margin-bottom: 25px;
-}
 
 .PV {
     background: #9B2335;
@@ -362,4 +333,56 @@ mat-spinner {
     text-align: center;
     font-size: 20px;
     color: #fff;
+}
+
+.inputFields {
+    margin: 18px 0;
+    padding: 10px;
+    width: 270px;
+    border: 1px solid rgba(10, 180, 180, 1);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: rgba(20, 20, 20, 0.342);
+    color: white;
+    outline: none;
+}
+
+.alert-error {
+    color:rgb(226, 24, 24);
+    font-weight: normal;
+  }
+  
+  .input-error {
+    border-color: rgb(226, 24, 24);
+    border-width: 1,5px;
+  }
+
+
+.noBullet {
+    list-style-type: none;
+    padding: 0;
+    width: 950px;
+}
+
+textarea {
+    resize: none;
+    height: 100px;
+    width: 700px !important;
+    font-size: 16px;
+}
+
+#post-btn {
+    border: 1px solid rgba(10, 180, 180, 1);
+    background: rgba(20, 20, 20, .6);
+    font-size: 18px;
+    color: white;
+    margin-bottom: 20px;
+    padding: 10px 43px;
+    cursor: pointer;
+    transition: .4s;
+}
+#post-btn:hover:enabled {
+    background: rgba(20, 20, 20, .8);
+    padding: 10px 80px;
 }
