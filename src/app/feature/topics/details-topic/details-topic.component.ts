@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { serverTimestamp } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { ITopic } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,8 +18,9 @@ export class DetailsTopicComponent implements OnInit{
   topicId!: string;
   currentUser$ = this.authService.currentUser$
   userId!: string;
-  owner$: any;
+  userEmail!: string;
   ownerId!: string;
+  ownerEmail!: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -27,7 +30,10 @@ export class DetailsTopicComponent implements OnInit{
     ) {}
 
   ngOnInit(): void {
-    this.currentUser$.subscribe(user => this.userId = user.uid);
+    this.currentUser$.subscribe(user => {
+      this.userId = user.uid;
+      this.userEmail = user.email;
+    });
     
     this.activatedRoute.params.subscribe(params => {
       this.topicId = params['topicId'];
@@ -35,17 +41,8 @@ export class DetailsTopicComponent implements OnInit{
     this.topicService.getTopicById(this.topicId).then((data) => {
       this.topic = data.data();
       this.ownerId = this.topic.ownerId;
+      this.ownerEmail = this.topic.ownerEmail;
     });
-
-    // this.authService.getUserById(this.ownerId).then(data => {
-    //   console.log(this.ownerId);
-      
-    //   this.owner$ = data.data();
-    //   console.log(this.owner$);
-      
-    // })
-
-
 
   }
 
@@ -55,7 +52,35 @@ export class DetailsTopicComponent implements OnInit{
       this.topicService.deleteTopic(this.topicId);
     }
 
-    this.router.navigate(['/home']);
+    this.router.navigate(['/topics']);
+  }
+
+  postComment(comment: NgControl) {
+    const newComment = {
+          content: comment.value,
+          createAt: serverTimestamp(),
+          ownerId: this.userId,
+          ownerEmail: this.userEmail,
+          topicId: this.topicId
+        }
+    
+        try {
+          const response = this.topicService.AddComment(newComment);
+          comment.reset();
+          console.log(response);
+          
+        } catch (error) {
+          
+        }
+
+  }
+
+  getComments () {
+
   }
 
 }
+
+
+
+

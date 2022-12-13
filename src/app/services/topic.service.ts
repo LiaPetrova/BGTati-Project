@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { collectionData, deleteDoc, doc, Firestore, getDoc, getDocs, limitToLast, updateDoc} from '@angular/fire/firestore';
 import { IComment, ITopic } from '../core/interfaces';
 import { AuthService } from './auth.service';
-import { addDoc, collection, serverTimestamp, limit, orderBy, query } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp, limit, orderBy, query, where } from 'firebase/firestore';
 import { map, Observable, Subscription, tap } from 'rxjs';
 
 @Injectable({
@@ -20,6 +20,7 @@ export class TopicService implements OnInit {
 
 
   ngOnInit(): void {
+    
   }
 
   AddTopic(topic: ITopic) {
@@ -31,15 +32,12 @@ export class TopicService implements OnInit {
     return updateDoc(doc(this.fs, `topics/${oldTopicId}`), updatedTopic);
   }
 
-  AddComment(comment: any) {
-    const res = addDoc(this.commentRef, comment);
-    return res;
-  }
+  
 
   async getAllTopics(forHomePage: boolean = false) {
     const result= {} as any;
     if(forHomePage) {
-      const q = query(this.topicRef, orderBy('createdAt', 'desc'), limit(4));
+      const q = query(this.topicRef, orderBy('createdAt', 'desc'), limit(6));
     const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
       const id = doc.id;
@@ -53,7 +51,18 @@ export class TopicService implements OnInit {
       result[id] = doc.data();
       });
     }
-    console.log(result);
+    return result;
+  }
+
+  async getTopicsByOwnerId(ownerId: any) {
+    const result = {} as any;
+    const q = query(this.topicRef, where("ownerId", "==", ownerId));
+    const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+      const id = doc.id;
+      result[id] = doc.data();
+      });
+
     return result;
   }
 
@@ -64,5 +73,12 @@ export class TopicService implements OnInit {
   deleteTopic(id: string) {
     return deleteDoc(doc(this.fs, `topics/${id}`));
   }
+  AddComment(comment: any) {
+    const res = addDoc(this.commentRef, comment);
+    return res;
+  }
 
+  getCommentsByTopicId (topicId: string) {
+    
+  }
 }
