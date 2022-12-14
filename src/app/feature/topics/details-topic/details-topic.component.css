@@ -33,14 +33,18 @@
 .card_datails h1 {
     font-size: 29px;
     padding-bottom: 8px;
+    width: 600px;
+    word-break: break-word;
 }
 
 .card_right img {
     /* height: 100%; */
     margin-top: 30px;
-    margin-left: 90px;
-    width: 150px;
-    border-radius: 2px;
+    margin-left: 140px;
+    max-width: 150px;
+    border-radius: 12px;
+    border: 3px solid  rgba(10, 180, 180, 1);
+
 }
 
 

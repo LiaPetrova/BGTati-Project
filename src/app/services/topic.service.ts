@@ -2,7 +2,7 @@ import { Injectable, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { collectionData, deleteDoc, doc, Firestore, getDoc, getDocs, limitToLast, updateDoc} from '@angular/fire/firestore';
 import { IComment, ITopic } from '../core/interfaces';
 import { AuthService } from './auth.service';
-import { addDoc, collection, serverTimestamp, limit, orderBy, query, where } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp, limit, orderBy, query, where, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { map, Observable, Subscription, tap } from 'rxjs';
 
 @Injectable({
@@ -38,7 +38,7 @@ export class TopicService implements OnInit {
   async getAllTopics(forHomePage: boolean = false) {
     const result= {} as any;
     if(forHomePage) {
-      const q = query(this.topicRef, orderBy('createdAt', 'desc'), limit(6));
+      const q = query(this.topicRef, orderBy('createdAt', 'desc'), limit(3));
     const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
       const id = doc.id;
@@ -90,4 +90,33 @@ export class TopicService implements OnInit {
       
     return result;
   }
+
+  async getCommentById (commentId: string) {
+    return getDoc(doc(this.fs, `comments/${commentId}`));
+  }
+
+  async likeComment(commentId: string, userId: string) {
+
+    const currentTopicRef = doc(this.fs, "comments", commentId);
+      await updateDoc(currentTopicRef, {
+        likes: arrayUnion(userId)
+      });
+    
+  }
+
+  async unlikeComment(commentId: string, userId: string) {
+
+    const currentTopicRef = doc(this.fs, "comments", commentId);
+      await updateDoc(currentTopicRef, {
+        likes: arrayRemove(userId)
+      });
+    
+  }
+
+  async deleteComment(commentId: string) {
+    return deleteDoc(doc(this.fs, `comments/${commentId}`));
+  }
+
+
 }
+

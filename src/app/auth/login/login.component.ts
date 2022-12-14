@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { Auth, authState } from '@angular/fire/auth';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from '@firebase/util';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -26,6 +29,7 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private toastrService: ToastrService,
     ) { }
 
   ngOnInit(): void {
@@ -44,8 +48,11 @@ export class LoginComponent {
 
       },
       error: (err)=> {
-        this.errorMessage = err.message
-        console.log(this.errorMessage);
+        const errorMessage = err.message;
+        if(errorMessage == 'Firebase: Error (auth/wrong-password).') {
+              this.toastrService.error(`Incorrect email or password`)
+        }
+        this.loginFormGroup.controls['password'].setValue('');
       }
     });
   }

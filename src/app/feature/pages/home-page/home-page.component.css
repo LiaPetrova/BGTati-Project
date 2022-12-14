@@ -22,6 +22,7 @@
     flex: 1;
     margin-top: 11.6em;
     width: 100%;
+    text-shadow: rgb(0 0 0 / 95%) 1px 0 10px;
 }
 
 .short-info>h1 {
@@ -30,7 +31,6 @@
     font-weight: 600;
     line-height: 1.1;
     color: #ffffff !important;
-    font-family: Ubuntu, sans-serif !important;
     pointer-events: auto;
     word-wrap: break-word;
     position: relative;
@@ -110,6 +110,13 @@ a {
   margin: 0;
   font-size: 1.5em;
   line-height: 1.2em;
+  word-break: break-word;
+  text-shadow: rgb(0 0 0 / 95%) 1px 0 10px;
+
+}
+
+.card:hover h1 {
+  text-shadow: none;
 }
 
 .card p {
@@ -134,8 +141,8 @@ a {
 }
 
 .card:hover .tags .tag {
-  background: var(--color);
-  color: white;
+  /* background: var(--color); */
+  color: var(--color);;
 }
 
 .card .date {
@@ -168,7 +175,7 @@ a {
 }
 
 .card:after {
-  background: white;
+  background: #72A4AB;
   width: 200%;
   height: 200%;
 }

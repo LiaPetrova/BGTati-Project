@@ -23,15 +23,15 @@ export class ProfileComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.currentUser$.subscribe(user => this.userId= user.uid);
+    this.currentUser$.subscribe(user => this.userId= user?.uid);
     this.getMyTopics();
     
   }
 
   async getMyTopics() {
     setTimeout(async () => {
-      this.topics = await this.topicService.getTopicsByOwnerId(this.userId);
-    }, 10);
+      this.topics = await this.topicService.getTopicsByOwnerId(this.userId);        
+    }, 50);
   }
 
 }

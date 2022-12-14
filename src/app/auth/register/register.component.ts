@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl, ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -32,7 +33,8 @@ export class RegisterComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -40,10 +42,26 @@ export class RegisterComponent {
 
   handleRegister(): void {
     const { email, passwords: {password} } = this.registerFormGroup.value;
+    //   this.authService.register$(email, password);
+    //   this.registerFormGroup.reset();
+            
+    //   if(errorMessage == 'auth/email-already-in-use') {
+    //     this.toastrService.error(`Email: ${email} is already taken!`)
+    //   }
+    // }
 
-    this.authService.register$(email, password);
-    this.router.navigate(['/home']);
-    
+    this.authService.register$(email, password).subscribe({
+      next: user => {
+        this.router.navigate(['/home']);
+      },
+      error: (err)=> {
+        const errorMessage = err.message;
+        if(errorMessage == 'auth/email-already-in-use') {
+              this.toastrService.error(`Email: ${email} is already taken!`)
+            }
+      }
+    });
+    this.registerFormGroup.reset();
   }
 
 }

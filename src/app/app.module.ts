@@ -27,6 +27,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { AuthService } from './services/auth.service';
 
 
 
@@ -48,7 +49,7 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
     RouterModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-
+    PagesModule,
     // AngularFireModule.initializeApp(environment.firebase),
     // AngularFirestoreModule,
     // AngularFireAuthModule,
@@ -70,15 +71,15 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
     SharedModule,
   ],
   providers: [
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: (authService: AuthService) => {
-    //     return () => authService.addUser();
-    //   },
-    //   deps: [AuthService],
-    //   multi: true
-    // },
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authService: AuthService) => {
+        return () => authService.addUser();
+      },
+      deps: [AuthService],
+      multi: true
+    },
   ],
   bootstrap: [
     AppComponent,

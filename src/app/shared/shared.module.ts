@@ -16,6 +16,6 @@ import { TimeAgoPipe } from './util/time-ago.pipe';
     ShortenPipe,
     TransformDatePipe,
     TimeAgoPipe
-  ]
+  ],
 })
 export class SharedModule { }

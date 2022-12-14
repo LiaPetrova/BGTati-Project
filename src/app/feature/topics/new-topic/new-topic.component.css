@@ -62,7 +62,7 @@ textarea {
 .createForm {
     width: 720px;
     padding: 10px 0;
-    background: rgba(20, 40, 40, 0.884);
+    background: rgba(20, 40, 40, 0.897);
     transition: .2s;
 }
 
@@ -110,16 +110,17 @@ textarea {
 }
 
 .alert-error {
-    color:rgb(226, 24, 24);
+    color:rgb(218, 40, 55);
     font-weight: normal;
+    font-size: 16px;
   }
   
-  .input-error {
+.input-error {
     border-color: rgb(226, 24, 24);
     border-width: 1,5px;
-  }
+} 
 
-  button:disabled,
+button:disabled,
 button[disabled]{
-  opacity: 0.5;
+    opacity: 0.5;
 }

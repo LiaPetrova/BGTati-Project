@@ -4,5 +4,4 @@ export interface ITopic {
     content: string,
     imageUrl: string,
     ownerId: string,
-    comments: string[]
 }

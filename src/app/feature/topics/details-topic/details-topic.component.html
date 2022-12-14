@@ -32,8 +32,9 @@
         
         <ng-container *ngIf="comments">
             <app-comments *ngFor="let comment of objectKeys(comments)"
-            [user]="currentUser$" [comments]="comments" 
-            [comment]="comment" [isOwner]="isOwner"></app-comments>
+            [user]="(currentUser$ | async)" [comments]="comments" 
+            [commentId]="comment" [topicId]="topicId"
+            (deleteComment)="deleteComment($event)"></app-comments>
         </ng-container>
 
         <ng-container *ngIf="currentUser$ | async">

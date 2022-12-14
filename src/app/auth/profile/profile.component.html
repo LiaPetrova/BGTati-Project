@@ -1,22 +1,20 @@
-<p>profile works!</p>
-<div *ngIf="topics">
-
+<!-- <div *ngIf="topics">
     <div *ngFor="let topic of objectKeys(topics)">
         <p>{{topics[topic].content}}</p>
     </div>
-</div>
+</div> -->
 
 <section id="my-posts">
-    <h1>My post.</h1>
+    <h1>My posts.</h1>
 
     <ng-container *ngIf="topics; else loadingIndicator">
-        <div *ngIf="topics.length > 0; else noTopic"  class="my-container">
+        <div *ngIf="objectKeys(topics).length > 0; else noTopic"  class="my-container">
                 <div class="cards-wrapper">
                 <div *ngFor="let topic of objectKeys(topics)"  class="card-grid-space">
                     <a class="card" routerLink="/topics/{{topic}}" style="--bg-img: url({{topics[topic].imageUrl}})">
                     <div>
                         <h1>{{topics[topic].title}}</h1>
-                        <p>{{topics[topic].content | shorten }}</p>
+                        <p>{{topics[topic].content | shorten:26 }}</p>
                         <div class="date">{{topics[topic].createdAt | transformDate | date: 'dd MMM yyyy' }}</div>
                         <div class="tags">
                         <!-- //TODO add owner -->

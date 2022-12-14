@@ -2,10 +2,10 @@
     <a class="card" routerLink="/topics/{{topic}}" style="--bg-img: url({{lastTopics[topic].imageUrl}})">
       <div>
         <h1>{{lastTopics[topic].title}}</h1>
-        <p>{{lastTopics[topic].content | shorten }}</p>
+        <p>{{lastTopics[topic].content | shorten:28 }}</p>
         <div class="date">{{lastTopics[topic].createdAt | transformDate | date: 'dd MMM yyyy' }}</div>
         <div class="tags">
-          <div class="tag">{{lastTopics[topic].ownerEmail}}</div>
+          <div class="tag">{{lastTopics[topic].ownerEmail | shorten:26}}</div>
         </div>
       </div>
     </a>

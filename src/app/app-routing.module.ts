@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './feature/pages/home-page/home-page.component';
+import { PageNotFoundComponent } from './feature/pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -19,15 +20,11 @@ const routes: Routes = [
   {
     path: 'topics',
       loadChildren: () => import('./feature/topics/topics.module').then(m => m.TopicsModule)
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
-  // {
-  //     path: 'themes',
-  //     loadChildren: () => import('./feature/themes/themes.module').then(m => m.ThemesModule)
-  // },
-  // {
-  //     path: '**',
-  //     component: PageNotFoundPageComponent
-  // }
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes);

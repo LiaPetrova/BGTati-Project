@@ -59,9 +59,9 @@ export class DetailsTopicComponent implements OnInit, OnChanges{
     const confirmation = confirm(`Are you sure you want to delete: ${this.topic.title}?`);
     if(confirmation) {
       this.topicService.deleteTopic(this.topicId);
+      this.router.navigate(['/topics']);
     }
 
-    this.router.navigate(['/topics']);
   }
 
   postComment(comment: NgControl) {
@@ -70,13 +70,14 @@ export class DetailsTopicComponent implements OnInit, OnChanges{
           createdAt: serverTimestamp(),
           ownerId: this.userId,
           ownerEmail: this.userEmail,
-          topicId: this.topicId
+          topicId: this.topicId,
+          likes: []
         }
     
         try {
           const response = this.topicService.AddComment(newComment);
           comment.reset();
-          console.log(response);
+          // console.log(response);
           setTimeout(() => {
             this.getComments();
 
@@ -91,11 +92,23 @@ export class DetailsTopicComponent implements OnInit, OnChanges{
   async getComments () {
     setTimeout(async () => {
       this.comments = await this.topicService.getCommentsByTopicId(this.topicId);
-      console.log(this.comments);
+      // console.log(this.comments);
       
     }, 10);
   }
 
+
+  deleteComment(commentId: string) {
+    try {
+      this.topicService.deleteComment(commentId)
+      setTimeout(async () => {
+        this.comments = await this.topicService.getCommentsByTopicId(this.topicId);
+      }, 150); 
+      
+    } catch(error) {
+      console.error(error);
+    }
+  }
 }
 
 

@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 30px;
 }
 
 .comment {
@@ -61,7 +62,7 @@
     color: rgb(9, 146, 146);
 }
 
-.like-btn, .unlike-btn {
+.like-btn, .unlike-btn, .delete-btn {
     float:right;
     font-size: 12px;
     margin-right: 10px;
@@ -79,7 +80,7 @@
     border-radius: 10px;
 }
 
-.unlike-btn {
+.unlike-btn, .delete-btn {
     color: white;
     background: rgb(195, 5, 81);
 }
@@ -92,3 +93,5 @@
     width: 65px;
     margin-bottom: 3px;
 }
+
+

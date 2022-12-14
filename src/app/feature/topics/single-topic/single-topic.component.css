@@ -28,6 +28,12 @@
     margin: 0;
     font-size: 1.5em;
     line-height: 1.2em;
+    word-break: break-word;
+    text-shadow: rgb(0 0 0 / 95%) 1px 0 10px;
+  }
+
+  .card:hover h1 {
+    text-shadow: none;
   }
   
   .card p {
@@ -52,7 +58,7 @@
   }
   
   .card:hover .tags .tag {
-    background: var(--color);
+    /* background: var(--color); */
     color: white;
   }
   
@@ -86,7 +92,7 @@
   }
   
   .card:after {
-    background: white;
+    background: #72A4AB;
     width: 200%;
     height: 200%;
   }

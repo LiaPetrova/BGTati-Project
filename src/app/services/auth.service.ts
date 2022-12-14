@@ -1,8 +1,10 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Auth, authState, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { collection, doc, Firestore, getDoc, getDocs, query, where } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 import { addDoc } from '@firebase/firestore';
-import { map, from, Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { map, from, Observable, tap } from 'rxjs';
 import { IUser } from '../core/interfaces';
 
 @Injectable({
@@ -17,9 +19,14 @@ export class AuthService implements OnInit {
 
   constructor(
     private auth: Auth,
-    private fs: Firestore) { }
+    private fs: Firestore
+    ) { }
 
   ngOnInit(): void {
+  }
+
+  addUser(): void {
+    this.currentUser$ = authState(this.auth);
   }
 
   login$(email: string, password: string) {

@@ -32,8 +32,8 @@ export class NewTopicComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser$.subscribe(user => {
-      this.userId = user.uid;
-      this.userEmail = user.email;
+      this.userId = user?.uid;
+      this.userEmail = user?.email;
     });
   }
   async submitTopic() {
@@ -42,7 +42,6 @@ export class NewTopicComponent implements OnInit {
       title: this.newTopicForm.value.title,
       content: this.newTopicForm.value.content,
       imageUrl: this.newTopicForm.value.imageUrl? this.newTopicForm.value.imageUrl : '/assets/topic.jpg',
-      comments: [],
       createdAt: serverTimestamp(),
       ownerId: this.userId,
       ownerEmail: this.userEmail
@@ -54,7 +53,7 @@ export class NewTopicComponent implements OnInit {
       
     }
     
-    this.router.navigate(['/home']);
+    this.router.navigate(['/topics']);
   }
 
 }
