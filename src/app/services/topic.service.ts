@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { collectionData, deleteDoc, doc, Firestore, getDoc, getDocs, limitToLast, updateDoc} from '@angular/fire/firestore';
 import { IComment, ITopic } from '../core/interfaces';
 import { AuthService } from './auth.service';
@@ -22,6 +22,7 @@ export class TopicService implements OnInit {
   ngOnInit(): void {
     
   }
+
 
   AddTopic(topic: ITopic) {
     const res = addDoc(this.topicRef, topic);
@@ -78,7 +79,15 @@ export class TopicService implements OnInit {
     return res;
   }
 
-  getCommentsByTopicId (topicId: string) {
-    
+  async getCommentsByTopicId (topicId: string) {
+    const result = {} as any;
+    const q = query(this.commentRef, where("topicId", "==", topicId), orderBy('createdAt', 'desc'));
+    const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+      const id = doc.id;
+      result[id] = doc.data();
+      });
+      
+    return result;
   }
 }

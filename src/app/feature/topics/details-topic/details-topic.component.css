@@ -363,6 +363,7 @@ mat-spinner {
     list-style-type: none;
     padding: 0;
     width: 950px;
+    text-align: center;
 }
 
 textarea {

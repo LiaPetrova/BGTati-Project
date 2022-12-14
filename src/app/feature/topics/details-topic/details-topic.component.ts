@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { serverTimestamp } from 'firebase/firestore';
@@ -12,15 +12,17 @@ import { TopicService } from 'src/app/services/topic.service';
   templateUrl: './details-topic.component.html',
   styleUrls: ['./details-topic.component.css']
 })
-export class DetailsTopicComponent implements OnInit{
+export class DetailsTopicComponent implements OnInit, OnChanges{
 
   topic!: any;
   topicId!: string;
   currentUser$ = this.authService.currentUser$
   userId!: string;
   userEmail!: string;
-  ownerId!: string;
+  isOwner!: boolean;
   ownerEmail!: string;
+  comments!: any;
+  objectKeys = Object.keys;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -30,9 +32,10 @@ export class DetailsTopicComponent implements OnInit{
     ) {}
 
   ngOnInit(): void {
+
     this.currentUser$.subscribe(user => {
-      this.userId = user.uid;
-      this.userEmail = user.email;
+      this.userId = user?.uid;
+      this.userEmail = user?.email;
     });
     
     this.activatedRoute.params.subscribe(params => {
@@ -40,11 +43,17 @@ export class DetailsTopicComponent implements OnInit{
     });
     this.topicService.getTopicById(this.topicId).then((data) => {
       this.topic = data.data();
-      this.ownerId = this.topic.ownerId;
+      this.isOwner = this.topic.ownerId == this.userId;
       this.ownerEmail = this.topic.ownerEmail;
     });
 
+    this.getComments();
+
   }
+
+ ngOnChanges(changes: SimpleChanges): void {
+   
+ }
 
   deleteTopic(): void {
     const confirmation = confirm(`Are you sure you want to delete: ${this.topic.title}?`);
@@ -58,7 +67,7 @@ export class DetailsTopicComponent implements OnInit{
   postComment(comment: NgControl) {
     const newComment = {
           content: comment.value,
-          createAt: serverTimestamp(),
+          createdAt: serverTimestamp(),
           ownerId: this.userId,
           ownerEmail: this.userEmail,
           topicId: this.topicId
@@ -68,6 +77,10 @@ export class DetailsTopicComponent implements OnInit{
           const response = this.topicService.AddComment(newComment);
           comment.reset();
           console.log(response);
+          setTimeout(() => {
+            this.getComments();
+
+          }, 300);
           
         } catch (error) {
           
@@ -75,8 +88,12 @@ export class DetailsTopicComponent implements OnInit{
 
   }
 
-  getComments () {
-
+  async getComments () {
+    setTimeout(async () => {
+      this.comments = await this.topicService.getCommentsByTopicId(this.topicId);
+      console.log(this.comments);
+      
+    }, 10);
   }
 
 }
