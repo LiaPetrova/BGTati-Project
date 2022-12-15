@@ -41,7 +41,7 @@ export class NewTopicComponent implements OnInit {
     const newTopic = {
       title: this.newTopicForm.value.title,
       content: this.newTopicForm.value.content,
-      imageUrl: this.newTopicForm.value.imageUrl? this.newTopicForm.value.imageUrl : '/assets/topic.jpg',
+      imageUrl: this.newTopicForm.value.imageUrl? this.newTopicForm.value.imageUrl : 'https://i.postimg.cc/zGRHCh7B/topic.jpg',
       createdAt: serverTimestamp(),
       ownerId: this.userId,
       ownerEmail: this.userEmail

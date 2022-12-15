@@ -17,9 +17,6 @@
 
 
 .info {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-style: italic;
-    font-weight: lighter;
     width: 250px;
     background: rgba(56, 56, 56, 0.801);
     padding: 55px 5px;
@@ -28,6 +25,11 @@
 
 .info>h2 {
     padding-top: 5.5em;
+    font-weight: 300;
+    font-size: 23px;
+}
+
+.info>p {
     font-weight: 300;
     font-size: 23px;
 }
