@@ -1,5 +1,10 @@
-<ng-container *ngIf="(topics | async) as topics; else loadingIndicator">
-    <section *ngIf="topics; else noTopic" class="cards-wrapper">
+<div id="search">
+    <input class="inputFields" #search="ngModel" ngModel name="search" type="text">
+    <button class="search-btn" (click)="searchTopics(search)">Search</button>
+</div>
+
+<ng-container *ngIf="topics || topics == 'no topics'; else loadingIndicator">
+    <section *ngIf="topics != 'no topics'; else noTopic" class="cards-wrapper">
         <app-single-topic *ngFor="let topic of objectKeys(topics)" [topics]="topics" [topic]="topic" ></app-single-topic>
     </section>
 
@@ -8,7 +13,7 @@
           <div class="no-posts-img">
               <img src="/assets/create.jpg" alt="image_nature_3">
           </div>
-          <p class="no-offer">No posts.</p>
+          <p class="no-offer">No matches for your search.</p>
       </div>
     </ng-template>
 </ng-container>

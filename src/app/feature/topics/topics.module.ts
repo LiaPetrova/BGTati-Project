@@ -11,6 +11,7 @@ import { DetailsTopicComponent } from './details-topic/details-topic.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { EditTopicComponent } from './edit-topic/edit-topic.component';
 import { CommentsComponent } from './comments/comments.component';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -22,7 +23,8 @@ import { CommentsComponent } from './comments/comments.component';
     SingleTopicComponent,
     DetailsTopicComponent,
     EditTopicComponent,
-    CommentsComponent
+    CommentsComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,

@@ -14,23 +14,8 @@ export class AllTopicsComponent implements OnInit {
 
   
   objectKeys = Object.keys;
-  topics: {[key:string]: ITopic} = {};
+  topics: Promise<{[key:string]: ITopic}> = this.topicService.getAllTopics();
 
   ngOnInit(): void {
-    this.topicService.getAllTopics().then(topics => this.topics = topics);
   }
-
-  async searchTopics (search: NgControl) {
-    this.topics = {}
-    let result: {[key:string]: ITopic} = {};
-    const oldTopics = await this.topicService.getAllTopics();
-    const topicsKeys = Object.keys(oldTopics);
-    topicsKeys.forEach(key => {
-      if(oldTopics[key].title.toLowerCase().includes(search.value.toLowerCase ())) {
-        result[key] = oldTopics[key];
-      }
-    });
-    this.topics = result;
-  }
-
 }

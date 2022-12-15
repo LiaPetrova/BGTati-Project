@@ -3,7 +3,8 @@
 
     <ul class="menu">
         <li><a routerLink="/home">Home</a></li>
-        <li><a routerLink="/topics">All topicss</a></li>
+        <li><a routerLink="/topics">All topics</a></li>
+        <li><a routerLink="/topics/search">Search</a></li>
 
         <ng-container *ngIf="(isLoggedIn$ | async) || (isLoggedIn$ | async) === undefined">
         <li><a routerLink="/topics/new">Create topics</a></li>
