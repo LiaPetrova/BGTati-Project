@@ -9,5 +9,5 @@ import { ITopic } from 'src/app/core/interfaces';
 export class SingleTopicComponent {
 
   @Input() topic: any;
-  @Input() lastTopics: any;
+  @Input() topics: any;
 }

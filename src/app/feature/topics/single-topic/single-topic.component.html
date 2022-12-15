@@ -1,11 +1,11 @@
 <div  class="card-grid-space">
-    <a class="card" routerLink="/topics/{{topic}}" style="--bg-img: url({{lastTopics[topic].imageUrl}})">
+    <a class="card" routerLink="/topics/{{topic}}" style="--bg-img: url({{topics[topic].imageUrl}})">
       <div>
-        <h1>{{lastTopics[topic].title}}</h1>
-        <p>{{lastTopics[topic].content | shorten:28 }}</p>
-        <div class="date">{{lastTopics[topic].createdAt | transformDate | date: 'dd MMM yyyy' }}</div>
+        <h1>{{topics[topic].title}}</h1>
+        <p>{{topics[topic].content | shorten:28 }}</p>
+        <div class="date">{{topics[topic].createdAt | transformDate | date: 'dd MMM yyyy' }}</div>
         <div class="tags">
-          <div class="tag">{{lastTopics[topic].ownerEmail | shorten:26}}</div>
+          <div class="tag">{{topics[topic].ownerEmail | shorten:26}}</div>
         </div>
       </div>
     </a>

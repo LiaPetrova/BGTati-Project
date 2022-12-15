@@ -219,23 +219,25 @@
     color: inherit;
   }
 
+  .no-posts {
+    text-align: center;
+  }
+
   .no-posts-img>img {
     width: 400px;
     display: inline-block;
     height: 330px;
     border-radius: 10px;
-    border: 13px solid #313131;
+    border: 8px solid #313131;
 }
 
 .no-posts-img {
-    margin-left: 565px;
     margin-top: 60px;
 }
 
 .no-offer {
-    margin-left: 635px;
     margin-top: 20px;
-    font-size: 20px;
+    font-size: 30px;
     color: #fff;
     margin-bottom: 50px;
 }

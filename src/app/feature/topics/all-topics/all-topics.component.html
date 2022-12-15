@@ -1,8 +1,24 @@
-<ng-container *ngIf="(topics | async) as lastTopics; else loadingIndicator">
+<div id="search">
+  <input class="inputFields" #search="ngModel" ngModel name="search" type="text">
+  <button class="search-btn" (click)="searchTopics(search)">Search</button>
+</div>
 
-    <section class="cards-wrapper">
-        <app-single-topic *ngFor="let topic of objectKeys(lastTopics)" [lastTopics]="lastTopics" [topic]="topic" ></app-single-topic>
+<ng-container *ngIf="!!topics; else loadingIndicator">
+
+    <section *ngIf="objectKeys(topics).length > 0; else noTopic" class="cards-wrapper">
+        <app-single-topic *ngFor="let topic of objectKeys(topics)" [topics]="topics" [topic]="topic" ></app-single-topic>
     </section>
+
+    <ng-template #noTopic>
+      {{topics}}
+      {{objectKeys(topics)}}
+      <div class="no-posts">
+          <div class="no-posts-img">
+              <img src="/assets/create.jpg" alt="image_nature_3">
+          </div>
+          <p class="no-offer">No posts.</p>
+      </div>
+    </ng-template>
 </ng-container>
 
 <ng-template #loadingIndicator>

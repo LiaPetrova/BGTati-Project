@@ -2,7 +2,7 @@ import { Injectable, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { collectionData, deleteDoc, doc, Firestore, getDoc, getDocs, limitToLast, updateDoc} from '@angular/fire/firestore';
 import { IComment, ITopic } from '../core/interfaces';
 import { AuthService } from './auth.service';
-import { addDoc, collection, serverTimestamp, limit, orderBy, query, where, arrayUnion, arrayRemove } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp, limit, orderBy, query, where, arrayUnion, arrayRemove, startAt, endAt } from 'firebase/firestore';
 import { map, Observable, Subscription, tap } from 'rxjs';
 
 @Injectable({
@@ -78,6 +78,7 @@ export class TopicService implements OnInit {
     const res = addDoc(this.commentRef, comment);
     return res;
   }
+
 
   async getCommentsByTopicId (topicId: string) {
     const result = {} as any;
