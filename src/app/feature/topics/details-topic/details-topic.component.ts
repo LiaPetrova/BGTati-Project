@@ -55,10 +55,16 @@ export class DetailsTopicComponent implements OnInit, OnChanges{
    
  }
 
-  deleteTopic(): void {
+  async deleteTopic() {
     const confirmation = confirm(`Are you sure you want to delete: ${this.topic.title}?`);
     if(confirmation) {
       this.topicService.deleteTopic(this.topicId);
+      
+      let commentsToDelete: any = await this.topicService.getCommentsByTopicId(this.topicId);
+        Object.keys(commentsToDelete).forEach(commentId => {
+          this.topicService.deleteComment(commentId);
+        });
+      
       this.router.navigate(['/topics']);
     }
 
@@ -75,16 +81,14 @@ export class DetailsTopicComponent implements OnInit, OnChanges{
         }
     
         try {
-          const response = this.topicService.AddComment(newComment);
+          this.topicService.AddComment(newComment);
           comment.reset();
-          // console.log(response);
           setTimeout(() => {
             this.getComments();
-
           }, 300);
           
         } catch (error) {
-          
+          console.error(error);
         }
 
   }
@@ -92,18 +96,17 @@ export class DetailsTopicComponent implements OnInit, OnChanges{
   async getComments () {
     setTimeout(async () => {
       this.comments = await this.topicService.getCommentsByTopicId(this.topicId);
-      // console.log(this.comments);
-      
+      return this.comments;
     }, 10);
   }
 
 
   deleteComment(commentId: string) {
     try {
-      this.topicService.deleteComment(commentId)
-      setTimeout(async () => {
-        this.comments = await this.topicService.getCommentsByTopicId(this.topicId);
-      }, 150); 
+      this.topicService.deleteComment(commentId);
+        setTimeout(async () => {
+          this.comments = await this.topicService.getCommentsByTopicId(this.topicId);
+        }, 150); 
       
     } catch(error) {
       console.error(error);
