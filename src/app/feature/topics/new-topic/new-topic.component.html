@@ -30,12 +30,20 @@
             <li>
                 <label for="imageUrl">ImageUrl:</label>
                 <input
+                [ngClass]="{'input-error': showErrorInControl('imageUrl')}"
                 formControlName="imageUrl"
                 id="imageUrl"
                 class="inputFields" 
                 name="imageUrl" 
                 placeholder="http://...">
             </li>
+
+            <ng-container *ngIf="showErrorInControl('imageUrl')">
+                <p *ngIf="newTopicForm.controls['imageUrl'].errors?.['pattern']" class="alert-error">
+                    Invalid imageUrl! No image? No problem! We have a default one!
+                    Just keep the field empty.
+                </p> 
+            </ng-container> 
 
             <li>
                 <label for="content">Content:</label>

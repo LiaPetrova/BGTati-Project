@@ -1,14 +1,13 @@
-import { Injectable, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { collectionData, deleteDoc, doc, Firestore, getDoc, getDocs, limitToLast, updateDoc} from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
+import {  deleteDoc, doc, Firestore, getDoc, getDocs, updateDoc} from '@angular/fire/firestore';
 import { IComment, ITopic } from '../core/interfaces';
 import { AuthService } from './auth.service';
-import { addDoc, collection, serverTimestamp, limit, orderBy, query, where, arrayUnion, arrayRemove, startAt, endAt } from 'firebase/firestore';
-import { map, Observable, Subscription, tap } from 'rxjs';
+import { addDoc, collection, limit, orderBy, query, where, arrayUnion, arrayRemove, startAt, startAfter, endBefore } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TopicService implements OnInit {
+export class TopicService  {
 
 
   currentUser$ = this.authService.currentUser$;
@@ -17,11 +16,6 @@ export class TopicService implements OnInit {
 
   constructor(
     private authService: AuthService, private fs: Firestore) { }
-
-
-  ngOnInit(): void {
-    
-  }
 
 
   AddTopic(topic: ITopic) {
@@ -35,27 +29,55 @@ export class TopicService implements OnInit {
 
   
 
-  async getAllTopics(forHomePage: boolean = false) {
+  async getTopics() {
+
     const result= {} as any;
-    if(forHomePage) {
-      const q = query(this.topicRef, orderBy('createdAt', 'desc'), limit(3));
+    const q = query(this.topicRef, orderBy('createdAt', 'desc'), limit(3));
     const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-      const id = doc.id;
-      result[id] = doc.data();
-    });
-    } else {
-      const q = query(this.topicRef, orderBy('createdAt', 'desc'));
+    querySnapshot.forEach((doc) => {
+    const id = doc.id;
+    result[id] = doc.data();
+      });
+    return result;
+  }
+
+  async getTopicsCount() {
+
+    const q = query(this.topicRef);
+    const querySnapshot = await getDocs(q);
+    
+    return Object.keys(querySnapshot.docs).length;
+  }
+
+  
+
+  async loadNextPage(lastTopic: any) {
+    const result= {} as any;
+    const q = query(this.topicRef, orderBy('createdAt', 'desc'), startAfter(lastTopic['createdAt']), limit(3));
     const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
       const id = doc.id;
       result[id] = doc.data();
       });
-    }
+
     return result;
   }
 
-  async getTopicsByOwnerId(ownerId: any) {
+  async loadPreviousPage(firstTopic: any) {
+    const result= {} as any;
+    const q = query(this.topicRef, orderBy('createdAt', 'desc'), endBefore(firstTopic['createdAt'] - 1), limit(3));
+    const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+      const id = doc.id;
+      result[id] = doc.data();
+      });
+
+    return result;
+  }
+
+  
+
+  async getTopicsByOwnerId(ownerId: string) {
     const result = {} as any;
     const q = query(this.topicRef, where("ownerId", "==", ownerId));
     const querySnapshot = await getDocs(q);
@@ -63,7 +85,7 @@ export class TopicService implements OnInit {
       const id = doc.id;
       result[id] = doc.data();
       });
-
+      
     return result;
   }
 
@@ -74,7 +96,8 @@ export class TopicService implements OnInit {
   deleteTopic(id: string) {
     return deleteDoc(doc(this.fs, `topics/${id}`));
   }
-  AddComment(comment: any) {
+
+  AddComment(comment: IComment) {
     const res = addDoc(this.commentRef, comment);
     return res;
   }

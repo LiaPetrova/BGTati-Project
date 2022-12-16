@@ -1,10 +1,10 @@
+import { FieldValue } from "firebase/firestore";
 
 export interface IComment {
-    uid: string,
     content: string,
-    created_at: string,
-    _ownerId: string,
+    createdAt: FieldValue,
+    ownerId: string,
+    ownerEmail: string,
     likes: string[],
-    dislikes: string[],
     topicId: string
 }

@@ -1,9 +1,7 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { serverTimestamp } from 'firebase/firestore';
-import { Observable } from 'rxjs';
-import { ITopic } from 'src/app/core/interfaces';
 import { AuthService } from 'src/app/services/auth.service';
 import { TopicService } from 'src/app/services/topic.service';
 
@@ -12,7 +10,7 @@ import { TopicService } from 'src/app/services/topic.service';
   templateUrl: './details-topic.component.html',
   styleUrls: ['./details-topic.component.css']
 })
-export class DetailsTopicComponent implements OnInit, OnChanges{
+export class DetailsTopicComponent implements OnInit {
 
   topic!: any;
   topicId!: string;
@@ -51,9 +49,6 @@ export class DetailsTopicComponent implements OnInit, OnChanges{
 
   }
 
- ngOnChanges(changes: SimpleChanges): void {
-   
- }
 
   async deleteTopic() {
     const confirmation = confirm(`Are you sure you want to delete: ${this.topic.title}?`);

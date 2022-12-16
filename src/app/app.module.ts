@@ -14,10 +14,7 @@ import { CoreModule } from './core/core.module';
 import { PagesModule } from './feature/pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 
-import { AngularFireModule } from '@angular/fire/compat';
-// import { AngularFirestoreModule, } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-// import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 import { environment } from '../environments/environment';
@@ -47,28 +44,18 @@ import { AuthService } from './services/auth.service';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    ToastrModule.forRoot(),
-    BrowserAnimationsModule,
-    PagesModule,
-    // AngularFireModule.initializeApp(environment.firebase),
-    // AngularFirestoreModule,
-    // AngularFireAuthModule,
-    AngularFireStorageModule,
-    AngularFireDatabaseModule,
-  
-
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    // // AngularFireModule.initializeApp(environment.firebase),
-    provideDatabase(() => getDatabase()),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    // provideStorage(() => getStorage()),
-    // AngularFireAuthModule,
-    // AngularFireDatabaseModule,
-
     CoreModule,
     PagesModule,
     SharedModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideDatabase(() => getDatabase()),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },

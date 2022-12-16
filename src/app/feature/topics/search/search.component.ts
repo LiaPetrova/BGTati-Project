@@ -21,7 +21,7 @@ export class SearchComponent {
   async searchTopics (search: NgControl) {
     this.topics = {}
     let result: {[key:string]: ITopic} = {};
-    const oldTopics = await this.topicService.getAllTopics();
+    const oldTopics = await this.topicService.getTopics();
     const topicsKeys = Object.keys(oldTopics);
     topicsKeys.forEach(key => {
       if(oldTopics[key].title.toLowerCase().includes(search.value.toLowerCase ())) {

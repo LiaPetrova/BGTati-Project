@@ -15,7 +15,7 @@ export class NewTopicComponent implements OnInit {
   newTopicForm: FormGroup = this.formBuilder.group({
     'title': new FormControl('', [Validators.required, Validators.minLength(4)]),
     'content': new FormControl('', [Validators.required, Validators.minLength(10)]),
-    'imageUrl': new FormControl('')
+    'imageUrl': new FormControl('', [Validators.pattern('^https?://$')])
   });
 
   showErrorInControl(controlName: string, sourceGroup: FormGroup = this.newTopicForm) {
@@ -27,7 +27,10 @@ export class NewTopicComponent implements OnInit {
   userEmail!: string;
 
 
-  constructor(private formBuilder: FormBuilder, private topicService: TopicService, private router: Router, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, 
+    private topicService: TopicService, 
+    private router: Router, 
+    private authService: AuthService) { }
 
 
   ngOnInit(): void {
