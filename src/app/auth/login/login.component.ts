@@ -45,13 +45,15 @@ export class LoginComponent {
         } else {
           this.router.navigate(['/home']);
         }
+        this.toastrService.success(`Welcome back, ${email[0].toUpperCase() + email.slice(1)}!`);
 
       },
       error: (err)=> {
         const errorMessage = err.message;
-        if(errorMessage == 'Firebase: Error (auth/wrong-password).') {
+        if(errorMessage == 'Firebase: Error (auth/wrong-password).' || errorMessage == 'Firebase: Error (auth/user-not-found).') {
               this.toastrService.error(`Incorrect email or password`)
         }
+        
         this.loginFormGroup.controls['password'].setValue('');
       }
     });

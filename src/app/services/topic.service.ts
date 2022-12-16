@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {  deleteDoc, doc, Firestore, getDoc, getDocs, updateDoc} from '@angular/fire/firestore';
 import { IComment, ITopic } from '../core/interfaces';
 import { AuthService } from './auth.service';
-import { addDoc, collection, limit, orderBy, query, where, arrayUnion, arrayRemove, startAt, startAfter, endBefore } from 'firebase/firestore';
+import { addDoc, collection, limit, orderBy, query, where, arrayUnion, arrayRemove, startAt, startAfter, endBefore, DocumentData } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +29,15 @@ export class TopicService  {
 
   
 
-  async getTopics() {
+  async getTopics(all: boolean = false) {
 
     const result= {} as any;
-    const q = query(this.topicRef, orderBy('createdAt', 'desc'), limit(3));
+    let q;
+    if(all) {
+      q = query(this.topicRef, orderBy('createdAt', 'desc'));
+    } else {
+      q = query(this.topicRef, orderBy('createdAt', 'desc'), limit(3));
+    }
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
     const id = doc.id;
@@ -43,16 +48,14 @@ export class TopicService  {
 
   async getTopicsCount() {
 
-    const q = query(this.topicRef);
-    const querySnapshot = await getDocs(q);
-    
+    const querySnapshot = await getDocs(this.topicRef);
     return Object.keys(querySnapshot.docs).length;
   }
 
   
 
   async loadNextPage(lastTopic: any) {
-    const result= {} as any;
+    const result: {[key:string]: any} = {};
     const q = query(this.topicRef, orderBy('createdAt', 'desc'), startAfter(lastTopic['createdAt']), limit(3));
     const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {

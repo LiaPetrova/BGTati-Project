@@ -53,12 +53,14 @@ export class RegisterComponent {
     this.authService.register$(email, password).subscribe({
       next: user => {
         this.router.navigate(['/home']);
+        this.toastrService.success(`Welcome, ${email}!`);
+
       },
       error: (err)=> {
         const errorMessage = err.message;
-        if(errorMessage == 'auth/email-already-in-use') {
+        if(errorMessage == 'Firebase: Error (auth/email-already-in-use).') {
               this.toastrService.error(`Email: ${email} is already taken!`)
-            }
+        }        
       }
     });
     this.registerFormGroup.reset();
