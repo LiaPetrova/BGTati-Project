@@ -1,1 +1,1 @@
-![Printscreen-Website](../assets/PrintScreen-Website.png)
+![Printscreen-Website](../src/assets/PrintScreen-Website.png)
