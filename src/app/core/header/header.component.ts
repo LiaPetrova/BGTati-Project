@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { Util } from 'src/app/shared/util/util';
 import { IUser } from '../interfaces';
 
 @Component({
@@ -14,12 +15,16 @@ export class HeaderComponent {
   currentUser$: Observable<any> = this.authService.currentUser$;
 
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, 
+    private router: Router,
+    private util: Util
+    ) {}
 
 
   logoutHandler() {
     this.authService.logout().subscribe(() => {
       this.router.navigate(['/']);
+      this.util.openSuccessSnackBar('You\'re logged out.', 'dismiss');
     });
   }
 }

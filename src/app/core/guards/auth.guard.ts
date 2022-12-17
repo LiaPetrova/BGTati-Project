@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { ToastrService } from 'ngx-toastr';
 import { map, Observable, take } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { Util } from 'src/app/shared/util/util';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService, 
     private router: Router,
-    private toastrService: ToastrService
+    private util: Util
     ) { }
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -21,8 +22,7 @@ export class AuthGuard implements CanActivate {
       if (isLoggedIn) {
         return true;
       }
-      
-      this.toastrService.error('You must be logged in to go there.')
+      this.util.openFailureSnackBar('You need to be logged in to go there', 'dismiss');
       return this.router.createUrlTree(['/user/login'], {
         queryParams: {
           'redirect-to': '/' + state.url

@@ -392,3 +392,7 @@ textarea {
     background: rgba(20, 20, 20, .8);
     padding: 10px 80px;
 }
+
+#post-btn:disabled {
+    opacity: 0.5;
+}

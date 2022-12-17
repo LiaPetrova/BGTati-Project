@@ -11,7 +11,7 @@
         <div *ngIf="objectKeys(topics).length > 0; else noTopic"  class="my-container">
                 <div class="cards-wrapper">
                 <div *ngFor="let topic of objectKeys(topics)"  class="card-grid-space">
-                    <a class="card" routerLink="/topics/{{topic}}" style="--bg-img: url({{topics[topic].imageUrl}})">
+                    <a class="card" routerLink="/topics/{{topic}}/details" style="--bg-img: url({{topics[topic].imageUrl}})">
                     <div>
                         <h1>{{topics[topic].title}}</h1>
                         <p>{{topics[topic].content | shorten:26 }}</p>

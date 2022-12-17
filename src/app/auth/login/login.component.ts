@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Auth, authState } from '@angular/fire/auth';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from '@firebase/util';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { Util } from 'src/app/shared/util/util';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,6 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
 
-  errorMessage: string = '';
 
   loginFormGroup: FormGroup = this.formBuilder.group({
     'email': new FormControl('', [Validators.required, Validators.email]),
@@ -29,12 +30,27 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private toastrService: ToastrService,
+    public util: Util,
+    public _snackBar: MatSnackBar
     ) { }
 
   ngOnInit(): void {
   }
 
+
+  openSuccessSnackBar(message: string, action: string){
+    this._snackBar.open(message, action, {
+      duration: 3000, horizontalPosition: 'end', verticalPosition: 'top',
+      panelClass: ['green-snackbar'],
+     });
+    }
+
+  openFailureSnackBar(message: string, action: string){
+  this._snackBar.open(message, action, {
+    duration: 3000, horizontalPosition: 'end', verticalPosition: 'top',
+    panelClass: ['red-snackbar']
+    });
+  }
 
   handleLogin(): void {
     const { email, password } = this.loginFormGroup.value;
@@ -45,13 +61,13 @@ export class LoginComponent {
         } else {
           this.router.navigate(['/home']);
         }
-        this.toastrService.success(`Welcome back, ${email[0].toUpperCase() + email.slice(1)}!`);
-
+        this.util.openSuccessSnackBar(`Welcome back, ${email[0].toUpperCase() + email.slice(1)}!`, 'dismiss')
       },
       error: (err)=> {
         const errorMessage = err.message;
         if(errorMessage == 'Firebase: Error (auth/wrong-password).' || errorMessage == 'Firebase: Error (auth/user-not-found).') {
-              this.toastrService.error(`Incorrect email or password`)
+              this.openFailureSnackBar(`Incorrect email or password!`, 'try again')
+            
         }
         
         this.loginFormGroup.controls['password'].setValue('');

@@ -82,7 +82,7 @@ export class TopicService  {
 
   async getTopicsByOwnerId(ownerId: string) {
     const result = {} as any;
-    const q = query(this.topicRef, where("ownerId", "==", ownerId));
+    const q = query(this.topicRef, where("ownerId", "==", ownerId), orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
       const id = doc.id;

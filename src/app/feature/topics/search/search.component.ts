@@ -19,7 +19,7 @@ export class SearchComponent {
   }
 
   async searchTopics (search: NgControl) {
-    this.topics = {}
+    this.topics = false;
     let result: {[key:string]: ITopic} = {};
     const oldTopics = await this.topicService.getTopics(true);
     const topicsKeys = Object.keys(oldTopics);

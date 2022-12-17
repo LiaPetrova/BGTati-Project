@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl, Valid
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { Util } from 'src/app/shared/util/util';
 
 @Component({
   selector: 'app-register',
@@ -34,7 +35,7 @@ export class RegisterComponent {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private toastrService: ToastrService
+    public util: Util
   ) { }
 
   ngOnInit(): void {
@@ -42,24 +43,20 @@ export class RegisterComponent {
 
   handleRegister(): void {
     const { email, passwords: {password} } = this.registerFormGroup.value;
-    //   this.authService.register$(email, password);
-    //   this.registerFormGroup.reset();
-            
-    //   if(errorMessage == 'auth/email-already-in-use') {
-    //     this.toastrService.error(`Email: ${email} is already taken!`)
-    //   }
-    // }
 
     this.authService.register$(email, password).subscribe({
       next: user => {
         this.router.navigate(['/home']);
-        this.toastrService.success(`Welcome, ${email}!`);
+        // this.toastrService.success(`Welcome, ${email}!`);
+        this.util.openSuccessSnackBar(`Welcome, ${email}!`, 'dismiss');
 
       },
       error: (err)=> {
         const errorMessage = err.message;
         if(errorMessage == 'Firebase: Error (auth/email-already-in-use).') {
-              this.toastrService.error(`Email: ${email} is already taken!`)
+              // this.toastrService.error(`Email: ${email} is already taken!`)
+          this.util.openFailureSnackBar(`Welcome, ${email}!`, 'dismiss');
+          
         }        
       }
     });

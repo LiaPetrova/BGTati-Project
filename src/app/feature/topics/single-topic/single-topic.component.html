@@ -1,5 +1,5 @@
 <div  class="card-grid-space">
-    <a class="card" routerLink="/topics/{{topic}}" style="--bg-img: url({{topics[topic].imageUrl}})">
+    <a class="card" routerLink="/topics/{{topic}}/details" style="--bg-img: url({{topics[topic].imageUrl}})">
       <div>
         <h1>{{topics[topic].title}}</h1>
         <p>{{topics[topic].content | shorten:28 }}</p>

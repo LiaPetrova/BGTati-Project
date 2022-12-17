@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { serverTimestamp } from 'firebase/firestore';
 import { AuthService } from 'src/app/services/auth.service';
 import { TopicService } from 'src/app/services/topic.service';
+import { Util } from 'src/app/shared/util/util';
 
 @Component({
   selector: 'app-details-topic',
@@ -26,7 +27,8 @@ export class DetailsTopicComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private topicService: TopicService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private util: Util
     ) {}
 
   ngOnInit(): void {
@@ -53,13 +55,14 @@ export class DetailsTopicComponent implements OnInit {
   async deleteTopic() {
     const confirmation = confirm(`Are you sure you want to delete: ${this.topic.title}?`);
     if(confirmation) {
+      this.util.openSuccessSnackBar('You deleted your topic successfully.', 'dismiss');
       this.topicService.deleteTopic(this.topicId);
       
       let commentsToDelete: any = await this.topicService.getCommentsByTopicId(this.topicId);
         Object.keys(commentsToDelete).forEach(commentId => {
           this.topicService.deleteComment(commentId);
         });
-      
+        
       this.router.navigate(['/topics']);
     }
 
@@ -99,6 +102,7 @@ export class DetailsTopicComponent implements OnInit {
   deleteComment(commentId: string) {
     try {
       this.topicService.deleteComment(commentId);
+      this.util.openSuccessSnackBar('You deleted your comment successfully.', 'dismiss');
         setTimeout(async () => {
           this.comments = await this.topicService.getCommentsByTopicId(this.topicId);
         }, 150); 

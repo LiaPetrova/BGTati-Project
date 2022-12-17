@@ -23,19 +23,13 @@ const routes: Routes = [
     component: SearchComponent
   },
   {
-    path: ':topicId',
+    path: ':topicId/details',
     component: DetailsTopicComponent,
   },
   {
     path: ':topicId/edit',
     component: EditTopicComponent
   },
-
-  // {
-  //     path: 'profile',
-  //     // canActivate: [AuthGuard],
-  //     component: ProfileComponent
-  // }
 ];
 
 export const TopicsRoutingModule = RouterModule.forChild(routes);

@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TopicService } from 'src/app/services/topic.service';
+import { Util } from 'src/app/shared/util/util';
 
 @Component({
   selector: 'app-new-topic',
@@ -15,7 +16,7 @@ export class NewTopicComponent implements OnInit {
   newTopicForm: FormGroup = this.formBuilder.group({
     'title': new FormControl('', [Validators.required, Validators.minLength(4)]),
     'content': new FormControl('', [Validators.required, Validators.minLength(10)]),
-    'imageUrl': new FormControl('', [Validators.pattern('^https?://$')])
+    'imageUrl': new FormControl('', [Validators.pattern('^https?://.*$')])
   });
 
   showErrorInControl(controlName: string, sourceGroup: FormGroup = this.newTopicForm) {
@@ -30,7 +31,9 @@ export class NewTopicComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, 
     private topicService: TopicService, 
     private router: Router, 
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private util: Util
+    ) { }
 
 
   ngOnInit(): void {
@@ -50,7 +53,8 @@ export class NewTopicComponent implements OnInit {
       ownerEmail: this.userEmail
     }
     try {
-      await this.topicService.AddTopic(newTopic);      
+      await this.topicService.AddTopic(newTopic);
+      this.util.openSuccessSnackBar('You successfully added your topic to the collection', 'ok');      
     } catch (error) {
       console.error(error);
       

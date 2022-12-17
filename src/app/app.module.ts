@@ -25,6 +25,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { AuthService } from './services/auth.service';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -48,6 +49,7 @@ import { AuthService } from './services/auth.service';
     PagesModule,
     SharedModule,
     ToastrModule.forRoot(),
+    MatSnackBarModule,
     BrowserAnimationsModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,

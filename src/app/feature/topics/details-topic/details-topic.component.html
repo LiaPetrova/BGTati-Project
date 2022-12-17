@@ -50,7 +50,7 @@
             </li>
 
             <li id="center-btn">
-                <button (click)="postComment(comment)" id="post-btn">Post Comment</button>
+                <button [disabled]="comment.invalid" (click)="postComment(comment)" id="post-btn">Post Comment</button>
             </li>
         </ng-container>
         </ul>
