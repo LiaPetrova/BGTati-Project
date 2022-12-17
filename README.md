@@ -24,12 +24,12 @@ This application consist of:
  
  ### General Functionality
 
-  -Authenticate users via Firebase
-  -CRUD Topics
-  -CR*D Comments on topics (no updating required)
-  -GET and display paginated lists of topics
-  -My Topics
-  -Search for keywords in Topic titles
+  - Authenticate users via Firebase
+  - CRUD Topics
+  - CR*D Comments on topics (no updating required)
+  - GET and display paginated lists of topics
+  - My Topics
+  - Search for keywords in Topic titles
 
  
  ### Guest-User
