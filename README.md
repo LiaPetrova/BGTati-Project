@@ -2,11 +2,11 @@
 
 ![Printscreen-Website](https://github.com/LiaPetrova/BGTati-Project/raw/master/src/assets/PrintScreen-Website.png)
 
-##Idea
+## Idea
 
 This is a forum application dedicated to help dads all around the world to exchange ideas, share opinion or just chat about dads topics.
 
-##Application Overview
+## Application Overview
 
 The application is using Angular as frontend, Firebase for backend and deployment, Material Design Spinner and Snackbar, otherwise CSS for the styles.
 
