@@ -1,1 +1,1 @@
-![Printscreen-Website](https://github.com/LiaPetrova/BGTati-Project/blob/master/PrintScreen-Website.png?raw=true)
+![Printscreen-Website](https://github.com/LiaPetrova/BGTati-Project/assets/PrintScreen-Website.png?raw=true)
