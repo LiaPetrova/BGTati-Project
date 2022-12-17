@@ -2,6 +2,8 @@
 
 ![Printscreen-Website](https://github.com/LiaPetrova/BGTati-Project/raw/master/src/assets/PrintScreen-Website.png)
 
+!Deployed Project: https://bgtati.web.app/home
+
 ## Idea
 
 This is a forum application dedicated to help dads all around the world to exchange ideas, share opinion or just chat about dads topics.
