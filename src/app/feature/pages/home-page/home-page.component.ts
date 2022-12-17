@@ -11,7 +11,7 @@ export class HomePageComponent implements OnInit{
   constructor(private topicService: TopicService) { }
 
   objectKeys = Object.keys;
-  topics = this.topicService.getTopics();
+  topics = this.topicService.getTopics(3);
 
 ngOnInit(): void {
 }

@@ -54,8 +54,7 @@ export class EditTopicComponent implements OnInit {
       }
       
     });
-    
-
+  
     
   }
 
@@ -64,10 +63,10 @@ export class EditTopicComponent implements OnInit {
     const newTopic = {
       title: this.editTopicForm.value.title,
       content: this.editTopicForm.value.content,
-      imageUrl: this.editTopicForm.value.imageUrl ? this.editTopicForm.value.imageUrl : '/assets/topic.jpg',
+      imageUrl: this.editTopicForm.value.imageUrl ? this.editTopicForm.value.imageUrl : 'https://i.postimg.cc/zGRHCh7B/topic.jpg',
     }
     try {
-      const response = await this.topicService.UpdateTopic(newTopic, this.topicId);
+      await this.topicService.UpdateTopic(newTopic, this.topicId);
       
     } catch (error) {
       console.error(error);

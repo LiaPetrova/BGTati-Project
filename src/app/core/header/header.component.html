@@ -8,7 +8,7 @@
 
         <ng-container *ngIf="(isLoggedIn$ | async) || (isLoggedIn$ | async) === undefined">
         <li><a routerLink="/topics/new">Create topics</a></li>
-        <li><a routerLink="/user/profile">Profile </a></li>
+        <li><a routerLink="/user/my-topics">My topics</a></li>
         <li><a (click)="logoutHandler()" href="javascript:void(0)">Logout</a></li>
         </ng-container>
 

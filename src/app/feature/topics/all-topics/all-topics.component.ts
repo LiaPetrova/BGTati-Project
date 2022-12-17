@@ -14,43 +14,27 @@ export class AllTopicsComponent implements OnInit {
 
   
   objectKeys = Object.keys;
-  topics: Promise<{[key:string]: ITopic}> = this.topicService.getTopics();
+  topics!: {[key:string]: ITopic};
   topicsCount!: number;
-  currentTopicNo: number = 3;
-  showNextBtn: boolean = true;
-  showPreviousBtn: boolean = false;
+  currentTopicNo: number = 6;
+  showLoadMoreBtn: boolean = true;
 
 
   ngOnInit(): void {
+    this.topicService.getTopics(6).then(topics => this.topics = topics);
     this.topicService.getTopicsCount().then(count => this.topicsCount = count);
   }
 
-  nextPage() {
-    this.topics.then(topics =>{ const lastId: any = Object.keys(topics).pop()
-      const lastTopic = topics[lastId];
-      this.topics = this.topicService.loadNextPage(lastTopic);
-      this.currentTopicNo+=3;
-      console.log(this.currentTopicNo);
-      
-      this.showPreviousBtn = true;
-      if(this.topicsCount - this.currentTopicNo < 1) {
-        this.showNextBtn = false;
-      }
-      
-    });
+  async loadMore () {
+    const lastId: any = Object.keys(this.topics).pop()
+          const lastTopic = this.topics[lastId];
+          const newTopics = await this.topicService.loadMoreTopics(lastTopic);
+          this.topics =  Object.assign(this.topics, newTopics);
+          this.currentTopicNo+=3;
+          if(this.topicsCount - this.currentTopicNo < 1) {
+            this.showLoadMoreBtn = false;
+          }
+
   }
 
-  previousPage() {
-    this.topics.then(topics =>{ const lastId: any = Object.keys(topics).pop()
-      const firstTopic = topics[lastId];
-      this.topics = this.topicService.loadPreviousPage(firstTopic);
-    });
-    this.currentTopicNo-=3;
-    this.showNextBtn = true;
-    if(this.currentTopicNo - 3 <= 0) {
-      this.showPreviousBtn = false;
-    }
-  }
-
-  
 }

@@ -22,7 +22,7 @@ export class RegisterComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     passwords: new FormGroup({
       password: this.passwordControl,
-      repassword: new FormControl('', [passwordsMatch(this.passwordControl)])
+      repassword: new FormControl('', [Validators.required, passwordsMatch(this.passwordControl)])
     })
   });
 
@@ -35,7 +35,7 @@ export class RegisterComponent {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    public util: Util
+    private util: Util
   ) { }
 
   ngOnInit(): void {
@@ -47,15 +47,13 @@ export class RegisterComponent {
     this.authService.register$(email, password).subscribe({
       next: user => {
         this.router.navigate(['/home']);
-        // this.toastrService.success(`Welcome, ${email}!`);
         this.util.openSuccessSnackBar(`Welcome, ${email}!`, 'dismiss');
 
       },
       error: (err)=> {
         const errorMessage = err.message;
         if(errorMessage == 'Firebase: Error (auth/email-already-in-use).') {
-              // this.toastrService.error(`Email: ${email} is already taken!`)
-          this.util.openFailureSnackBar(`Welcome, ${email}!`, 'dismiss');
+          this.util.openFailureSnackBar(`Email: ${email} is already taken!`, 'dismiss');
           
         }        
       }

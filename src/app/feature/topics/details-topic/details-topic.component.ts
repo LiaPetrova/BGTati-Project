@@ -58,11 +58,11 @@ export class DetailsTopicComponent implements OnInit {
       this.util.openSuccessSnackBar('You deleted your topic successfully.', 'dismiss');
       this.topicService.deleteTopic(this.topicId);
       
-      let commentsToDelete: any = await this.topicService.getCommentsByTopicId(this.topicId);
+      let commentsToDelete: {key: {}} = await this.topicService.getCommentsByTopicId(this.topicId);
         Object.keys(commentsToDelete).forEach(commentId => {
           this.topicService.deleteComment(commentId);
         });
-        
+
       this.router.navigate(['/topics']);
     }
 

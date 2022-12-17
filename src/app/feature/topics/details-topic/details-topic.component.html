@@ -12,7 +12,6 @@
         <p class="disc">Content: {{topic.content}}</p>
 
         <div *ngIf="isOwner" class="social-btn">
-            <!-- Only for registered user and author of the post -->
             <a routerLink="/topics/{{topicId}}/edit" class="edit-btn">Edit</a>
             <a (click)="deleteTopic()" class="del-btn">Delete</a>
         </div>

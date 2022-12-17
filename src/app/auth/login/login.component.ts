@@ -17,8 +17,8 @@ export class LoginComponent {
 
 
   loginFormGroup: FormGroup = this.formBuilder.group({
-    'email': new FormControl('', [Validators.required, Validators.email]),
-    'password': new FormControl('', [Validators.required, Validators.minLength(5)])
+    'email': new FormControl('', [Validators.required]),
+    'password': new FormControl('', [Validators.required ])
   });
 
   showErrorInControl(controlName: string, sourceGroup: FormGroup = this.loginFormGroup) {
@@ -30,27 +30,12 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    public util: Util,
-    public _snackBar: MatSnackBar
+    private util: Util,
     ) { }
 
   ngOnInit(): void {
   }
 
-
-  openSuccessSnackBar(message: string, action: string){
-    this._snackBar.open(message, action, {
-      duration: 3000, horizontalPosition: 'end', verticalPosition: 'top',
-      panelClass: ['green-snackbar'],
-     });
-    }
-
-  openFailureSnackBar(message: string, action: string){
-  this._snackBar.open(message, action, {
-    duration: 3000, horizontalPosition: 'end', verticalPosition: 'top',
-    panelClass: ['red-snackbar']
-    });
-  }
 
   handleLogin(): void {
     const { email, password } = this.loginFormGroup.value;
@@ -65,9 +50,10 @@ export class LoginComponent {
       },
       error: (err)=> {
         const errorMessage = err.message;
-        if(errorMessage == 'Firebase: Error (auth/wrong-password).' || errorMessage == 'Firebase: Error (auth/user-not-found).') {
-              this.openFailureSnackBar(`Incorrect email or password!`, 'try again')
-            
+        if(errorMessage == 'Firebase: Error (auth/wrong-password).' || 
+        errorMessage == 'Firebase: Error (auth/user-not-found).' ||
+        errorMessage == 'Firebase: Error (auth/invalid-email).') {
+            this.util.openFailureSnackBar(`Incorrect email or password!`, 'try again')
         }
         
         this.loginFormGroup.controls['password'].setValue('');

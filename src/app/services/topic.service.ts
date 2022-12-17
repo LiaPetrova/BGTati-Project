@@ -29,14 +29,16 @@ export class TopicService  {
 
   
 
-  async getTopics(all: boolean = false) {
+  async getTopics(count?: number) {
 
     const result= {} as any;
     let q;
-    if(all) {
-      q = query(this.topicRef, orderBy('createdAt', 'desc'));
-    } else {
+    if(count == 3) {
       q = query(this.topicRef, orderBy('createdAt', 'desc'), limit(3));
+    } else if (count == 6){
+      q = query(this.topicRef, orderBy('createdAt', 'desc'), limit(6));
+    } else {
+      q = query(this.topicRef, orderBy('createdAt', 'desc'));
     }
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
@@ -54,7 +56,7 @@ export class TopicService  {
 
   
 
-  async loadNextPage(lastTopic: any) {
+  async loadMoreTopics(lastTopic: any) {
     const result: {[key:string]: any} = {};
     const q = query(this.topicRef, orderBy('createdAt', 'desc'), startAfter(lastTopic['createdAt']), limit(3));
     const querySnapshot = await getDocs(q);

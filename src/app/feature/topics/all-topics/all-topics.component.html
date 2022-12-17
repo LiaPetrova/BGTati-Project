@@ -1,11 +1,10 @@
-<ng-container *ngIf="(topics | async) as topics; else loadingIndicator">
+<ng-container *ngIf="topics as topics; else loadingIndicator">
     <section *ngIf="topics; else noTopic" class="cards-wrapper">
         <app-single-topic *ngFor="let topic of objectKeys(topics)" [topics]="topics" [topic]="topic" ></app-single-topic>
 
       </section>
       <div class="pagination-btn">
-        <button *ngIf="showPreviousBtn" class="previous-page-btn" (click)="previousPage()">Previous Page</button>
-        <button *ngIf="showNextBtn" class="next-page-btn" (click)="nextPage()">Next Page</button>
+        <button *ngIf="showLoadMoreBtn" class="next-page-btn" (click)="loadMore()">Load More Topics</button>
       </div>
 
     <ng-template #noTopic>

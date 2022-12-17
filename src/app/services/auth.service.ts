@@ -13,7 +13,7 @@ import { IUser } from '../core/interfaces';
 export class AuthService implements OnInit {
 
   currentUser$: Observable<any> = authState(this.auth);
-  isLoggedIn$ = this.currentUser$.pipe(map(user => !!user));
+  isLoggedIn$: Observable<boolean> = this.currentUser$.pipe(map(user => !!user));
   userRef = collection(this.fs, 'users');
 
 
@@ -41,13 +41,5 @@ export class AuthService implements OnInit {
     return from(signOut(this.auth));
   }
 
-  getUserById (userId: string) {
-    
-  }
-
-  //TODO
-  // addUser() {
-  //   authState(this.auth).pipe(tap);
-  // }
 }
 
