@@ -2,7 +2,7 @@
 
 ![Printscreen-Website](https://github.com/LiaPetrova/BGTati-Project/raw/master/src/assets/PrintScreen-Website.png)
 
- Deployed Project: https://bgtati.web.app/home <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="http://cdn.onlinewebfonts.com/svg/img_527746.png" alt="html5" width="40" height="40" color="white"/> </a>
+ Deployed Project: https://bgtati.web.app/home <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="http://cdn.onlinewebfonts.com/svg/img_527746.png" alt="html5" width="30" height="30" color="white" background-color="white"/> </a>
 
 ## Idea
 
