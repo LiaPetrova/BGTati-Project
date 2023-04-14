@@ -4,11 +4,9 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 80% 30%;
-    margin: auto;
-    width: 720px;
-    height: 370px auto;
+    width: 55%;
+    margin: 0 auto;
     margin-top: 7em;
-    left: 35%;
     text-align: center;
     display: flex;
     color: white;
@@ -17,7 +15,7 @@
 
 
 .info {
-    width: 250px;
+    width: 25%;
     background: rgba(56, 56, 56, 0.801);
     padding: 55px 5px;
     border-right: 5px solid rgba(30, 30, 30, .8);
@@ -40,7 +38,7 @@
 }
 
 .loginForm {
-    width: 580px;
+    width: 75%;
     padding: 30px 0;
     /* background: rgba(0, 0, 0, 0.8); */
     background: rgba(20, 40, 40, 0.897);
@@ -134,3 +132,38 @@ button:disabled,
 button[disabled]{
   opacity: 0.5;
 }
+
+
+@media screen and (max-width: 1200px) {
+    .loginSection {
+        width: 65%;
+    }
+  }
+
+  @media screen and (max-width: 950px) {
+    .loginSection {
+        width: 70%;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    .loginSection {
+        width: 80%;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .loginSection {
+        width: 85%;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .info {
+        display: none;
+    }
+    .loginForm {
+        width: 100%;
+        
+    }
+  }

@@ -1,25 +1,26 @@
 <section *ngIf="!!topic; else loadingIndicator" id="details-page">
     <div class="main_card">
+        <div class="topic-info">
     <div class="card_left">
-    <div class="card_datails">
     
         <h1>{{topic.title}}</h1>
-        <h3>Created by an author: {{ownerEmail}}</h3>
-        <div class="card_animal">
+        <h3>Created by: {{ownerEmail}}</h3>
             <p class="card-date">Date: {{topic.createdAt | transformDate | date: 'dd MMM yyyy'}}</p>
-        </div>
     
-        <p class="disc">Content: {{topic.content}}</p>
+        
+    
+    </div>
+    <div class="card_right">
+    <img src="{{topic.imageUrl}}" alt="image">
+    </div>
+</div>
+    <div class="content">
+    <p class="disc">Content: {{topic.content}}</p>
 
         <div *ngIf="isOwner" class="social-btn">
             <a routerLink="/topics/{{topicId}}/edit" class="edit-btn">Edit</a>
             <a (click)="deleteTopic()" class="del-btn">Delete</a>
         </div>
-    
-    </div>
-    </div>
-    <div class="card_right">
-    <img src="{{topic.imageUrl}}" alt="image">
     </div>
     </div>
     

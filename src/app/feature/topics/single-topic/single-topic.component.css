@@ -13,7 +13,7 @@
     background-size: cover;
     background-position: center;
     box-shadow: 0 0 5em -1em black;
-    transition: all, var(--transition-time);
+    transition: all 0.5s ease-in-out;
     position: relative;
     overflow: hidden;
     border: 10px solid #72A4AB;
@@ -49,17 +49,17 @@
   
   .card .tags .tag {
     font-size: 0.75em;
-    background: rgba(255,255,255,0.5);
+    background: rgba(190, 190, 190, 0.5);
     border-radius: 0.3rem;
     padding: 0 0.5em;
     margin-right: 0.5em;
     line-height: 1.5em;
-    transition: all, var(--transition-time);
+    transition: all 0.5s ease-in-out;
   }
   
   .card:hover .tags .tag {
     /* background: var(--color); */
-    color: white;
+    color: black;
   }
   
   .card .date {
@@ -81,7 +81,7 @@
     left: -50%;
     top: -50%;
     z-index: -5;
-    transition: all, var(--transition-time);
+    transition: all 0.5s;
     transition-timing-function: ease-in-out;
   }
   

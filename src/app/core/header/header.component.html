@@ -1,22 +1,50 @@
-<nav>
+<div class="header">
     <img routerLink="/home" src="/assets/logo.png" alt="logo">
+    <div class="nav-wrapper">
+    <div class="hamburger-wrapper">
 
-    <ul class="menu">
-        <li><a routerLink="/home">Home</a></li>
-        <li><a routerLink="/topics">All topics</a></li>
-        <li><a routerLink="/topics/search">Search</a></li>
+        <i (click)="toggleHamburger()" [ngClass]="isHamburgerOpen ? 'i-active' :'i-inactive'" class="fa-solid fa-xmark">
+        </i>
 
-        <ng-container *ngIf="(isLoggedIn$ | async) || (isLoggedIn$ | async) === undefined">
-        <li><a routerLink="/topics/new">Create topics</a></li>
-        <li><a routerLink="/user/my-topics">My topics</a></li>
-        <li><a (click)="logoutHandler()" href="javascript:void(0)">Logout</a></li>
-        </ng-container>
+        <i (click)="toggleHamburger()" [ngClass]="isHamburgerOpen ? 'i-inactive' :'i-active'" class="fa-solid fa-bars"></i>
+        <ul class="menu nav-list"
+        [ngClass]="isHamburgerOpen ? 'active' :'inactive'">
+            <li (click)="toggleHamburger()"><a routerLink="/home">Home</a></li>
+            <li (click)="toggleHamburger()"><a routerLink="/topics">All topics</a></li>
+            <li (click)="toggleHamburger()"><a routerLink="/topics/search">Search</a></li>
 
-        
-        <ng-container *ngIf="(isLoggedIn$ | async) === false">
-        <li><a routerLink="/user/register">Register</a></li>
-        <li><a routerLink="/user/login">Login</a></li>
-        </ng-container>
-    </ul>
+            <ng-container *ngIf="(isLoggedIn$ | async) || (isLoggedIn$ | async) === undefined">
+                <li (click)="toggleHamburger()"><a routerLink="/topics/new">Create topics</a></li>
+                <li (click)="toggleHamburger()"><a routerLink="/user/my-topics">My topics</a></li>
+                <li (click)="toggleHamburger()"><a (click)="logoutHandler()" href="javascript:void(0)">Logout</a></li>
+            </ng-container>
 
-</nav>
+
+            <ng-container *ngIf="(isLoggedIn$ | async) === false">
+                <li><a routerLink="/user/register">Register</a></li>
+                <li><a routerLink="/user/login">Login</a></li>
+            </ng-container>
+        </ul>
+    </div>
+
+    <nav class="nav-desctop">
+        <ul class="menu nav-list">
+            <li><a routerLink="/home">Home</a></li>
+            <li><a routerLink="/topics">All topics</a></li>
+            <li><a routerLink="/topics/search">Search</a></li>
+
+            <ng-container *ngIf="(isLoggedIn$ | async) || (isLoggedIn$ | async) === undefined">
+                <li><a routerLink="/topics/new">Create topics</a></li>
+                <li><a routerLink="/user/my-topics">My topics</a></li>
+                <li><a (click)="logoutHandler()" href="javascript:void(0)">Logout</a></li>
+            </ng-container>
+
+
+            <ng-container *ngIf="(isLoggedIn$ | async) === false">
+                <li><a routerLink="/user/register">Register</a></li>
+                <li><a routerLink="/user/login">Login</a></li>
+            </ng-container>
+        </ul>
+    </nav>
+</div>
+</div>

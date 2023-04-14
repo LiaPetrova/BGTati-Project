@@ -13,12 +13,17 @@ import { IUser } from '../interfaces';
 export class HeaderComponent {
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
   currentUser$: Observable<any> = this.authService.currentUser$;
+  isHamburgerOpen: Boolean = false;
 
 
   constructor(private authService: AuthService, 
     private router: Router,
     private util: Util
     ) {}
+
+    toggleHamburger () {
+        this.isHamburgerOpen = !this.isHamburgerOpen;
+    }
 
 
   logoutHandler() {

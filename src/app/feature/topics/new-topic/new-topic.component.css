@@ -4,7 +4,7 @@
     background-repeat: no-repeat;
     background-position: 80% 30%;
     margin: auto;
-    width: 740px;
+    width: 65%;
     height: 590px auto;
     margin-top: 2em;
     left: 35%;
@@ -53,15 +53,15 @@ label:nth-of-type(2) {
     padding: 0;
 }
 
-textarea {
+.noBullet textarea {
     resize: none;
     height: 140px;
-    width: 400px !important;
+    width: 460px;
 }
 
 .createForm {
-    width: 720px;
-    padding: 10px 0;
+    width: 100%;
+    padding: 1rem 0;
     background: rgba(20, 40, 40, 0.897);
     transition: .2s;
 }
@@ -124,4 +124,54 @@ textarea {
 button:disabled,
 button[disabled]{
     opacity: 0.5;
+}
+
+@media screen and (max-width: 1180px) {
+    .newTopic {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .newTopic {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 865px) {
+    .newTopic {
+        width: 80%;
+    }
+
+    .noBullet textarea {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .newTopic {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .info {
+        display: none;
+    }
+
+    .noBullet textarea {
+        width: 360px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .newTopic {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 395px) {
+    .noBullet textarea {
+        width: 270px;
+    }
 }

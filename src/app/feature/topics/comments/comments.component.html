@@ -1,26 +1,27 @@
-
 <li>
     <div class="owner-info">
         <span class="owner">{{comments[commentId].ownerEmail}}</span>
     </div>
     <div class="comment-content">
         <div class="comment">
-            <p class="likes-no">Likes: {{comments[commentId].likes.length}}</p>
-            <ng-container  *ngIf="user && !isOwner">
-                <button (click)="likeHandler()" *ngIf="hasLiked === false" class="like-btn">Like</button>
-                <button (click)="unlikeHandler()" *ngIf="hasLiked" class="unlike-btn">Unlike</button>
-            </ng-container>
-            <ng-container  *ngIf="user && isOwner">
-                <button (click)="deleteHandler()" class="delete-btn">Delete</button>
-            </ng-container>
+            <div class="header">
+                <p class="likes-no">Likes: {{comments[commentId].likes.length}}</p>
+                <ng-container *ngIf="user && !isOwner">
+                    <button (click)="likeHandler()" *ngIf="hasLiked === false" class="like-btn">Like</button>
+                    <button (click)="unlikeHandler()" *ngIf="hasLiked" class="unlike-btn">Unlike</button>
+                </ng-container>
+                <ng-container *ngIf="user && isOwner">
+                    <button (click)="deleteHandler()" class="delete-btn">Delete</button>
+                </ng-container>
+            </div>
             <p>
                 {{comments[commentId].content}}
 
             </p>
             <span class="timestamp">{{comments[commentId].createdAt | transformDate | timeAgo }}</span>
-            
+
         </div>
-        
+
     </div>
-    
+
 </li>

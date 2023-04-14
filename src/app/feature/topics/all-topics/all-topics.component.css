@@ -38,43 +38,7 @@
     color: #fff;
   }
 
-  @media screen and (max-width: 1285px) {
-  .cards-wrapper {
-    grid-template-columns: 1fr 1fr;
-  }
-}
 
-@media screen and (max-width: 900px) {
-  .cards-wrapper {
-    grid-template-columns: 1fr;
-  }
-  .info {
-    justify-content: center;
-  }
-  .card-grid-space .num {
-    margin-left: 0;
-    text-align: center;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .cards-wrapper {
-    padding: 4rem 2rem;
-  }
-  .card {
-    max-width: calc(100vw - 4rem);
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .info {
-    display: block;
-    text-align: center;
-  }
-  .info h1 {
-    margin: 0;
-  }
-}
 
 .pagination-btn {
   margin-bottom: 30px;
@@ -83,7 +47,7 @@
 }
 
 
-.pagination-btn>button {
+/* .pagination-btn>button {
   font-size: 15px;
   margin-left: 30px;
   width: 150px;
@@ -97,13 +61,33 @@
   color: white;
   outline: none;
   border-radius: 30px;
+} */
+
+.pagination-btn>button {
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 30px;
+    width: 150px;
+    height: 45px;
+    padding: 6px;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: rgb(9, 146, 146);
+    color: white;
+    outline: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
 }
 
-.previous-page-btn {
+.pagination-btn>button:hover {
+    color: rgb(9, 146, 146);
+    background-color: white;
+    border-color: rgb(9, 146, 146);
 }
 
-.next-page-btn {
-}
 
 .no-posts-img>img {
   width: 360px;
@@ -127,3 +111,40 @@
 .no-posts {
   text-align: center;
 }
+@media screen and (max-width: 1285px) {
+    .cards-wrapper {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media screen and (max-width: 900px) {
+    .cards-wrapper {
+      grid-template-columns: 1fr;
+    }
+    .info {
+      justify-content: center;
+    }
+    .card-grid-space .num {
+      margin-left: 0;
+      text-align: center;
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+    .cards-wrapper {
+      padding: 4rem 2rem;
+    }
+    .card {
+      max-width: calc(100vw - 4rem);
+    }
+  }
+  
+  @media screen and (max-width: 450px) {
+    .info {
+      display: block;
+      text-align: center;
+    }
+    .info h1 {
+      margin: 0;
+    }
+  }
