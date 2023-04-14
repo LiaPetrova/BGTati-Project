@@ -9,7 +9,7 @@
     margin: 50px auto;
     left: 55%;
     border-radius: 0.4rem;
-    width: 85%;
+    width: 75%;
     background: #e4a1a9;
     background: -webkit-linear-gradient(to right, #03434C, rgb(179, 91, 98));
     background: -webkit-gradient(linear, left top, right top, from(#03434C), to(rgb(#08272C)));
@@ -38,16 +38,15 @@
 }
 
 .card_right img {
-    /* height: 100%; */
-    max-width: 12rem;
-    max-height: 12rem;
+    width: 12rem;
+    height: auto;
     border-radius: 12px;
     border: 3px solid  rgba(10, 180, 180, 1);
-
 }
 .topic-info {
     display: flex;
     justify-content: space-between;
+    gap: 0.5rem;
 }
 
 .card-date {
@@ -242,7 +241,7 @@ span {
     height: 200px auto;
     margin: 50px auto;
     display: flex;
-    width: 85%;
+    width: 75%;
     border-radius: 0.4rem;
     background: #e4a1a9;
     background: -webkit-linear-gradient(to right, #03434C, rgb(179, 91, 98));
@@ -326,6 +325,28 @@ textarea {
     opacity: 0.5;
 }
 
+@media screen and (max-width:1280px) {
+
+    .main_card {
+        width: 80%;
+    }
+    .comments-info {
+        width: 80%;
+    }
+    
+}
+
+@media screen and (max-width:1150px) {
+
+    .main_card {
+        width: 85%;
+    }
+    .comments-info {
+        width: 85%;
+    }
+    
+}
+
 @media screen and (max-width:950px) {
     .noBullet {
         width: 85%;
@@ -351,5 +372,10 @@ textarea {
     }
     .comments-info {
         width: 95%;
+    }
+
+    .card_right img {
+        width: 10rem;
+        height: auto;
     }
 }
