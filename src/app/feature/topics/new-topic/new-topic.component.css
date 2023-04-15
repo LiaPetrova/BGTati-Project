@@ -5,7 +5,6 @@
     background-position: 80% 30%;
     margin: auto;
     width: 65%;
-    height: 590px auto;
     margin-top: 2em;
     left: 35%;
     text-align: center;
@@ -26,6 +25,7 @@
     background: rgba(20, 20, 20, 0.342);
     color: white;
     outline: none;
+    border-radius: 0.4rem;
 }
 
 label {
@@ -55,8 +55,8 @@ label:nth-of-type(2) {
 
 .noBullet textarea {
     resize: none;
-    height: 140px;
-    width: 460px;
+    height: 200px;
+    width: 500px;
 }
 
 .createForm {
@@ -81,6 +81,8 @@ label:nth-of-type(2) {
     padding: 10px 43px;
     cursor: pointer;
     transition: .4s;
+    border-radius: 0.4rem;
+
 }
 
 .info {
@@ -138,7 +140,7 @@ button[disabled]{
     }
 }
 
-@media screen and (max-width: 865px) {
+@media screen and (max-width: 895px) {
     .newTopic {
         width: 80%;
     }
@@ -155,12 +157,15 @@ button[disabled]{
 }
 
 @media screen and (max-width: 650px) {
+    .createForm {
+        width: 100%;
+    }
     .info {
         display: none;
     }
 
     .noBullet textarea {
-        width: 360px;
+        width: 400px;
     }
 }
 
@@ -170,7 +175,7 @@ button[disabled]{
     }
 }
 
-@media screen and (max-width: 395px) {
+@media screen and (max-width: 430px) {
     .noBullet textarea {
         width: 270px;
     }

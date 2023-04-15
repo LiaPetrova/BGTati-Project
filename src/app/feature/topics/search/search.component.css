@@ -17,6 +17,8 @@
     border-radius: 30px;
     outline: none;
     height: 45px;
+    border-radius: 0.4rem;
+
 }
 
 .search-btn {

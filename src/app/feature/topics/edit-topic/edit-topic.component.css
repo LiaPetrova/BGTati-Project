@@ -4,8 +4,7 @@
     background-repeat: no-repeat;
     background-position: 80% 30%;
     margin: auto;
-    width: 740px;
-    height: 590px auto;
+    width: 65%;
     margin-top: 2em;
     left: 35%;
     text-align: center;
@@ -26,6 +25,8 @@
     background: rgba(20, 20, 20, 0.342);
     color: white;
     outline: none;
+    border-radius: 0.4rem;
+
 }
 
 label {
@@ -53,14 +54,14 @@ label:nth-of-type(2) {
     padding: 0;
 }
 
-textarea {
+.noBullet textarea {
     resize: none;
-    height: 140px;
-    width: 400px !important;
+    height: 200px;
+    width: 500px;
 }
 
 .createForm {
-    width: 720px;
+    width: 75%;
     padding: 10px 0;
     background: rgba(20, 40, 40, 0.884);
     transition: .2s;
@@ -81,13 +82,14 @@ textarea {
     padding: 10px 43px;
     cursor: pointer;
     transition: .4s;
+    border-radius: 0.4rem;
 }
 
 .info {
     font-family:Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
     font-weight: lighter;
-    width: 250px;
+    width: 25%;
     background: rgba(56, 56, 56, 0.801);
     padding: 55px 5px;
     border-right: 5px solid rgba(30, 30, 30, .8);
@@ -136,4 +138,58 @@ textarea {
 button:disabled,
 button[disabled]{
   opacity: 0.5;
+}
+
+
+@media screen and (max-width: 1180px) {
+    .newTopic {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .newTopic {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 895px) {
+    .newTopic {
+        width: 80%;
+    }
+
+    .noBullet textarea {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .newTopic {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .createForm {
+        width: 100%;
+    }
+    .info {
+        display: none;
+    }
+
+    .noBullet textarea {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .newTopic {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 395px) {
+    .noBullet textarea {
+        width: 270px;
+    }
 }

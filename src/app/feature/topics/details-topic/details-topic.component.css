@@ -278,6 +278,8 @@ mat-spinner {
     background: rgba(20, 20, 20, 0.342);
     color: white;
     outline: none;
+    border-radius: 0.4rem;
+
 }
 
 .alert-error {
@@ -315,6 +317,7 @@ textarea {
     padding: 10px 43px;
     cursor: pointer;
     transition: .4s;
+    border-radius: 0.4rem;
 }
 #post-btn:hover:enabled {
     background: rgba(20, 20, 20, .8);
