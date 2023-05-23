@@ -1,16 +1,13 @@
 <section *ngIf="!!topic; else loadingIndicator" id="details-page">
     <div class="main_card">
         <div class="topic-info">
-    <div class="card_left">
     
         <h1>{{topic.title}}</h1>
         <h3>Created by: {{ownerEmail}}</h3>
             <p class="card-date">Date: {{topic.createdAt | transformDate | date: 'dd MMM yyyy'}}</p>
     
-        
-    
-    </div>
-    <div class="card_right">
+            
+    <div class="card_photo">
     <img src="{{topic.imageUrl}}" alt="image">
     </div>
 </div>
