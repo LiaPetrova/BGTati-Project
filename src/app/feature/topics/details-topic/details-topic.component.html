@@ -1,61 +1,56 @@
 <section *ngIf="!!topic; else loadingIndicator" id="details-page">
     <div class="main_card">
         <div class="topic-info">
-    
-        <h1>{{topic.title}}</h1>
-        <h3>Created by: {{ownerEmail}}</h3>
-            <p class="card-date">Date: {{topic.createdAt | transformDate | date: 'dd MMM yyyy'}}</p>
-    
-            
-    <div class="card_photo">
-    <img src="{{topic.imageUrl}}" alt="image">
-    </div>
-</div>
-    <div class="content">
-    <p class="disc">Content: {{topic.content}}</p>
+            <div class="header">
+            <h1>{{topic.title}}</h1>
+            <span class="card-date">Date: {{topic.createdAt | transformDate | date: 'dd MMM yyyy'}}</span>
+            </div>
+            <h3>Created by: {{ownerEmail}}</h3>
 
-        <div *ngIf="isOwner" class="social-btn">
-            <a routerLink="/topics/{{topicId}}/edit" class="edit-btn">Edit</a>
-            <a (click)="deleteTopic()" class="del-btn">Delete</a>
+
+        </div>
+        <div class="card_photo">
+            <img src="{{topic.imageUrl}}" alt="image">
+        </div>
+        <div class="content">
+            <p class="disc">Content: {{topic.content}}</p>
+
+            <div *ngIf="isOwner" class="social-btn">
+                <a routerLink="/topics/{{topicId}}/edit" class="edit-btn">Edit</a>
+                <a (click)="deleteTopic()" class="del-btn">Delete</a>
+            </div>
         </div>
     </div>
-    </div>
-    
-    </section>
-    
-    <section id="comments">
-        <div class="comments-info">
+
+</section>
+
+<section id="comments">
+    <div class="comments-info">
         <ul class="noBullet">
-        
-        <ng-container *ngIf="comments">
-            <app-comments *ngFor="let comment of objectKeys(comments)"
-            [user]="(currentUser$ | async)" [comments]="comments" 
-            [commentId]="comment" [topicId]="topicId"
-            (deleteComment)="deleteComment($event)"></app-comments>
-        </ng-container>
 
-        <ng-container *ngIf="currentUser$ | async">
-            <li>
-                <textarea 
-                id="content"
-                class="inputFields" 
-                name="content" 
-                placeholder="..."
-                #comment="ngModel"
-                type="text" name="comment"
-                ngModel required minlength="2"></textarea>
-            </li>
+            <ng-container *ngIf="comments">
+                <app-comments *ngFor="let comment of objectKeys(comments)" [user]="(currentUser$ | async)"
+                    [comments]="comments" [commentId]="comment" [topicId]="topicId"
+                    (deleteComment)="deleteComment($event)"></app-comments>
+            </ng-container>
 
-            <li id="center-btn">
-                <button [disabled]="comment.invalid" (click)="postComment(comment)" id="post-btn">Post Comment</button>
-            </li>
-        </ng-container>
+            <ng-container *ngIf="currentUser$ | async">
+                <li>
+                    <textarea id="content" class="inputFields" name="content" placeholder="..." #comment="ngModel"
+                        type="text" name="comment" ngModel required minlength="2"></textarea>
+                </li>
+
+                <li id="center-btn">
+                    <button [disabled]="comment.invalid" (click)="postComment(comment)" id="post-btn">Post
+                        Comment</button>
+                </li>
+            </ng-container>
         </ul>
     </div>
 
-    </section>
+</section>
 
-    <ng-template #loadingIndicator>
-        <mat-spinner></mat-spinner>
-        <p class="loading">Loading...</p>
-    </ng-template>
+<ng-template #loadingIndicator>
+    <mat-spinner></mat-spinner>
+    <p class="loading">Loading...</p>
+</ng-template>

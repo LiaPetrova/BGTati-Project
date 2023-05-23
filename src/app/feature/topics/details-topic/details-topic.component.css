@@ -20,30 +20,22 @@
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
 }
 
-
-
-.card_datails {
-    width: 96%;
-    padding: 50px;
-    margin-top: -25px;
-}
-
-.card_datails h1 {
-    font-size: 29px;
-    padding-bottom: 8px;
-    width: 37.5rem;
-    word-break: break-word;
+.topic-info .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .card_photo {
     text-align: center;
-    height: 16rem;
-    width: 20rem;
+    overflow: hidden;
 }
 
 .card_photo img {
-    object-fit: cover;
     height: auto;
+    width: 22rem;
+    object-fit: cover;
     border-radius: 12px;
     border: 3px solid  rgba(10, 180, 180, 1);
 }
@@ -51,6 +43,7 @@
 
 .card-date {
     color: rgb(223, 210, 210);
+    margin: 0 0 16px;
 }
 
 .content {
@@ -213,14 +206,6 @@ p {
     line-height: 1.4;
 }
 
-span {
-    font-size: 12px;
-    font-weight: bold;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: .05em;
-    margin: 2em 0 0 0;
-}
 
 .thumb {
     max-height: 350px;
@@ -380,5 +365,8 @@ textarea {
     .card_right img {
         width: 10rem;
         height: auto;
+    }
+    .card_photo img {
+        width: 17rem;
     }
 }
